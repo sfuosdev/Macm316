@@ -4,6 +4,7 @@ module.exports = {
       'react-app/jest',
       'airbnb',
       'airbnb/hooks',
+      'plugin:testing-library/react',
       'plugin:prettier/recommended'
     ],
     plugins: ['react', 'jest'],
