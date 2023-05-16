@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import Menu from './components/menu/Menu';
+import GraphingCalculator from './components/calculator/GraphingCalculator';
+
+const PageContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+`;
+
+const MenuContainer = styled.div`
+    width: 300px;
+    border-right-width: thick;
+    border-right-style: dotted;
+`;
+
+const CalculatorContainer = styled.div`
+    flex: 1;
+`;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <PageContainer>
+            <MenuContainer>
+                <Menu />
+            </MenuContainer>
+            <CalculatorContainer>
+                <GraphingCalculator />
+            </CalculatorContainer>
+        </PageContainer>
+    );
 }
 
 export default App;
