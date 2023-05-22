@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Menu from './components/menu/Menu';
-import GraphingCalculator from './components/calculator/GraphingCalculator';
+import Calculator from './components/calculator/Calculator';
+import { CalculatorContextProvider } from './context/calculatorContext';
 
 const PageContainer = styled.div`
     display: flex;
@@ -10,7 +11,7 @@ const PageContainer = styled.div`
 `;
 
 const MenuContainer = styled.div`
-    width: 300px;
+    width: 350px;
     border-right-width: thick;
     border-right-style: dotted;
 `;
@@ -22,12 +23,16 @@ const CalculatorContainer = styled.div`
 function App() {
     return (
         <PageContainer>
-            <MenuContainer>
-                <Menu />
-            </MenuContainer>
-            <CalculatorContainer>
-                <GraphingCalculator />
-            </CalculatorContainer>
+            <CalculatorContextProvider>
+                <>
+                    <MenuContainer>
+                        <Menu />
+                    </MenuContainer>
+                    <CalculatorContainer>
+                        <Calculator />
+                    </CalculatorContainer>
+                </>
+            </CalculatorContextProvider>
         </PageContainer>
     );
 }

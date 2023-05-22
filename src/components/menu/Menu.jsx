@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import MenuOptions from './MenuOptions';
-import MethodSelect from './MethodSelect';
+import MenuBody from './MenuBody';
+import NumericalMethodSelect from './NumericalMethodSelect';
 import ModeSelect from './ModeSelect';
 
 const Wrapper = styled.div`
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
 `;
 
-const ModeWrapper = styled.div`
+const MenuHeaderWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -18,15 +18,22 @@ const ModeWrapper = styled.div`
     border-bottom-style: dotted;
 `;
 
+const MenuBodyWrapper = styled.div`
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+`;
+
 function Menu() {
     return (
         <Wrapper>
-            <ModeWrapper>
+            <MenuHeaderWrapper>
                 <ModeSelect />
-                <MethodSelect />
-            </ModeWrapper>
-            <hr />
-            <MenuOptions />
+                <NumericalMethodSelect />
+            </MenuHeaderWrapper>
+            <MenuBodyWrapper>
+                <MenuBody />
+            </MenuBodyWrapper>
         </Wrapper>
     );
 }
