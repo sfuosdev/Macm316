@@ -21,6 +21,7 @@ module.exports = {
       'linebreak-style': 'off',
       'no-useless-constructor': 0,
       'import/prefer-default-export': 0,
+      'jest/no-identical-title': 0,
       'import/no-extraneous-dependencies': ["error", {"devDependencies": true}],
       'prettier/prettier': [
         'error',

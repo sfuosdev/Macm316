@@ -15,29 +15,27 @@ const parser = math.parser();
 
 // returns lagrange polynomial as string
 function lagrangePolynomial(f, xStart, h) {
-    if(f == '') return '';
-    else
-    {
-        parser.evaluate(`f(x) = ${f}`);
+    if (f === '') return '';
 
-        const xMid = xStart + h;
-        const xEnd = xStart + 2 * h;
+    parser.evaluate(`f(x) = ${f}`);
 
-        // corresponding f(x) values
-        const yStart = parser.evaluate(`f(${xStart})`);
-        const yMid = parser.evaluate(`f(${xMid})`);
-        const yEnd = parser.evaluate(`f(${xEnd})`);
+    const xMid = xStart + h;
+    const xEnd = xStart + 2 * h;
 
-        // L(k, x)
-        const lStart = `(x - ${xMid}) * (x - ${xEnd}) / ((${xStart} - ${xMid}) * (${xStart} - ${xEnd}))`;
-        const lMid = `(x - ${xStart}) * (x - ${xEnd}) / ((${xMid} - ${xStart}) * (${xMid} - ${xEnd}))`;
-        const lEnd = `(x - ${xStart}) * (x - ${xMid}) / ((${xEnd} - ${xStart}) * (${xEnd} - ${xMid}))`;
+    // corresponding f(x) values
+    const yStart = parser.evaluate(`f(${xStart})`);
+    const yMid = parser.evaluate(`f(${xMid})`);
+    const yEnd = parser.evaluate(`f(${xEnd})`);
 
-        // create lagrange polynomial as string
-        const lagrange = `${yStart} * ${lStart} + ${yMid} * ${lMid} + ${yEnd} * ${lEnd}`;
+    // L(k, x)
+    const lStart = `(x - ${xMid}) * (x - ${xEnd}) / ((${xStart} - ${xMid}) * (${xStart} - ${xEnd}))`;
+    const lMid = `(x - ${xStart}) * (x - ${xEnd}) / ((${xMid} - ${xStart}) * (${xMid} - ${xEnd}))`;
+    const lEnd = `(x - ${xStart}) * (x - ${xMid}) / ((${xEnd} - ${xStart}) * (${xEnd} - ${xMid}))`;
 
-        return lagrange;
-    }
+    // create lagrange polynomial as string
+    const lagrange = `${yStart} * ${lStart} + ${yMid} * ${lMid} + ${yEnd} * ${lEnd}`;
+
+    return lagrange;
 }
 
 // returns the derivative of the lagrange polynomial at xTarget
