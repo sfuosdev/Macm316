@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import MenuBody from './MenuBody';
 import NumericalMethodSelect from './NumericalMethodSelect';
 import ModeSelect from './ModeSelect';
+import Footer from './Footer';
 
 const Wrapper = styled.div`
     display: flex;
@@ -18,12 +19,6 @@ const MenuHeaderWrapper = styled.div`
     border-bottom-style: dotted;
 `;
 
-const MenuBodyWrapper = styled.div`
-    display: flex;
-    padding: 10px;
-    flex-wrap: wrap;
-`;
-
 function Menu() {
     return (
         <Wrapper>
@@ -31,9 +26,8 @@ function Menu() {
                 <ModeSelect />
                 <NumericalMethodSelect />
             </MenuHeaderWrapper>
-            <MenuBodyWrapper>
-                <MenuBody />
-            </MenuBodyWrapper>
+            <MenuBody />
+            <Footer />
         </Wrapper>
     );
 }

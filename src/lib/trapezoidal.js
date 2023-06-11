@@ -1,17 +1,17 @@
 // trapezoidal rule
-// trapezoidal(func, x_start, x_end, interval)
-import {create, all} from "mathjs";
+// trapezoidal(func, xStart, xEnd, interval)
+import { create, all } from 'mathjs';
 
-function trapezoidal(func, x_start, x_end, interval) {
+function trapezoidal(func, xStart, xEnd, interval) {
     const math = create(all, {});
     const node = math.parse(func);
     const f = node.compile();
-    
-    const delta = (x_end - x_start) / interval;
 
-    let total = f.evaluate({x: x_start}) + f.evaluate({x:x_end});
-    for (let i = 1; i < interval; i++) {
-        total += 2 * f.evaluate({x: x_start + (i * delta)});
+    const delta = (xEnd - xStart) / interval;
+
+    let total = f.evaluate({ x: xStart }) + f.evaluate({ x: xEnd });
+    for (let i = 1; i < interval; i += 1) {
+        total += 2 * f.evaluate({ x: xStart + i * delta });
     }
 
     return (delta / 2) * total;

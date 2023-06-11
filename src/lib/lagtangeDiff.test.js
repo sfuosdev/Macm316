@@ -10,7 +10,7 @@ describe('lagrangePolynomial(f, xStart, h)', () => {
         const actual = lagrangePolynomial(f, xStart, h);
         const expected =
             '0 * (x - 1) * (x - 2) / ((0 - 1) * (0 - 2)) + 1 * (x - 0) * (x - 2) / ((1 - 0) * (1 - 2)) + 4 * (x - 0) * (x - 1) / ((2 - 0) * (2 - 1))';
-        
+
         expect(actual).toBe(expected);
     });
 
@@ -27,14 +27,14 @@ describe('lagrangePolynomial(f, xStart, h)', () => {
     });
 
     it('should return the polynomial when f is polynomial', () => {
-        const f = '2 * x + 1'
+        const f = '2 * x + 1';
         const xStart = 0;
         const h = 1;
 
         const actual = lagrangePolynomial(f, xStart, h);
         const expected =
             '1 * (x - 1) * (x - 2) / ((0 - 1) * (0 - 2)) + 3 * (x - 0) * (x - 2) / ((1 - 0) * (1 - 2)) + 5 * (x - 0) * (x - 1) / ((2 - 0) * (2 - 1))';
-        
+
         expect(actual).toEqual(expected);
     });
 
@@ -44,9 +44,9 @@ describe('lagrangePolynomial(f, xStart, h)', () => {
         const h = 0.5;
 
         const actual = lagrangePolynomial(f, xStart, h);
-        const expected = 
+        const expected =
             '0 * (x - 0.5) * (x - 1) / ((0 - 0.5) * (0 - 1)) + 0.479425538604203 * (x - 0) * (x - 1) / ((0.5 - 0) * (0.5 - 1)) + 0.8414709848078965 * (x - 0) * (x - 0.5) / ((1 - 0) * (1 - 0.5))';
-        
+
         expect(actual).toEqual(expected);
     });
 
@@ -56,9 +56,9 @@ describe('lagrangePolynomial(f, xStart, h)', () => {
         const h = 0.5;
 
         const actual = lagrangePolynomial(f, xStart, h);
-        const expected = 
+        const expected =
             '1 * (x - 0.5) * (x - 1) / ((0 - 0.5) * (0 - 1)) + 1.6487212707001282 * (x - 0) * (x - 1) / ((0.5 - 0) * (0.5 - 1)) + 2.718281828459045 * (x - 0) * (x - 0.5) / ((1 - 0) * (1 - 0.5))';
-        
+
         expect(actual).toEqual(expected);
     });
 
@@ -126,7 +126,7 @@ describe('lagrangeDiff(f, h, xTarget)', () => {
         const xTarget = 1.5;
 
         const actual = lagrangeDiff(f, h, xTarget);
-        const expected = 6.00;
+        const expected = 6.0;
 
         expect(actual).toBeCloseTo(expected, 2);
     });
@@ -148,7 +148,7 @@ describe('lagrangeDiff(f, h, xTarget)', () => {
         const xTarget = 0;
 
         const actual = lagrangeDiff(f, h, xTarget);
-        const expected = 1.0066800;
+        const expected = 1.00668;
 
         expect(actual).toBeCloseTo(expected, 6);
     });
@@ -157,9 +157,9 @@ describe('lagrangeDiff(f, h, xTarget)', () => {
         const f = 'x^3';
         const h = 0;
         const xTarget = 2;
-    
+
         const actual = lagrangeDiff(f, h, xTarget);
-    
+
         expect(actual).toBeNaN();
     });
 });
