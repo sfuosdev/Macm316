@@ -1,4 +1,4 @@
-import trapezoidal from './trapezoidal';
+import trapezoidal from '../../lib/trapezoidal';
 
 test('x^2 from 0 to 2 with 3 subintervals', () => {
     // f(x) = x^2, x_start = 0, x_end = 2, interval = 3

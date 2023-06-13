@@ -1,4 +1,4 @@
-import { lagrangePolynomial, lagrangeDiff } from './lagrangeDiff';
+import { lagrangePolynomial, lagrangeDiff } from '../../lib/lagrangeDiff';
 
 // lagrangeDiff(f, xStart, h) tests
 describe('lagrangePolynomial(f, xStart, h)', () => {

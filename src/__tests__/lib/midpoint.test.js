@@ -1,4 +1,4 @@
-import numericalDiff from './midpoint';
+import numericalDiff from '../../lib/midpoint';
 
 test('x^2 at x = 3 with h = 0.01', () => {
     // given f(x) = x^2, x = 3, h = 0.01

@@ -22,7 +22,8 @@
     "eject": "react-scripts eject",
     "prettier": "prettier --write src/**/*.js{,x}",
     "lint": "eslint src/**/*.js{,x}",
-    "lint:fix": "eslint --fix src/**/*.js{,x}"
+    "lint:fix": "eslint --fix src/**/*.js{,x}",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

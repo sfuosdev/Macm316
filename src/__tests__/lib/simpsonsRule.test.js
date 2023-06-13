@@ -1,4 +1,4 @@
-import simpsonsRule from "./simpsonsRule";
+import simpsonsRule from '../../lib/simpsonsRule';
 
 test('x^2 from 1 to 5 with 2 subintervals', () => {
     const res = simpsonsRule('x^2', 1, 5, 2);
@@ -9,7 +9,6 @@ test('x^2 from 1 to 5 with 3 subintervals', () => {
     const res = simpsonsRule('x^2', 1, 5, 3);
     expect(res).toBeCloseTo(41.333333);
 });
-
 
 test('x^3 from 0 to 3 with 4 subintervals', () => {
     const res = simpsonsRule('x^3', 0, 3, 4);
@@ -22,7 +21,7 @@ test('2^x from 0 to 3 with 4 subintervals', () => {
 });
 
 test('1/x from 1 to 5 with 10 subintervals', () => {
-    const res = simpsonsRule('1/x',1, 5, 10);
+    const res = simpsonsRule('1/x', 1, 5, 10);
     expect(res).toBeCloseTo(1.609487);
 });
 
@@ -38,7 +37,7 @@ test('3x-x^2 from 0 to 3 with 3 subintervals', () => {
 
 test('-3x^3+11x^2-4 from 0 to 5 with 7 subintervals', () => {
     const res = simpsonsRule('-3x^3+11x^2-4', 0, 5, 7);
-    expect(res).toBeCloseTo(-30.416666666666667);
+    expect(res).toBeCloseTo(-30.416);
 });
 
 test('sqrt(x) from 0 to 2 with 4 subintervals', () => {
@@ -63,7 +62,7 @@ test('(sin(x))^2 from 0 to pi with 6 subintervals', () => {
 
 test('6+3cos(x) from 0 to pi/2 with 2 subintervals', () => {
     const res = simpsonsRule('6+3cos(x)', 0, Math.PI / 2, 2);
-    expect(res).toBeCloseTo(12.431617593216543);
+    expect(res).toBeCloseTo(12.431);
 });
 
 test('tan(x) from 0 to pi/3 with 3 subintervals', () => {
