@@ -6,6 +6,7 @@
     "function": "^0.6.1",
     "function-plot": "^1.23.2",
     "joi": "^17.9.2",
+    "mathjax": "^3.2.2",
     "mathjs": "^11.8.0",
     "plot": "^1.0.22",
     "prop-types": "^15.8.1",
