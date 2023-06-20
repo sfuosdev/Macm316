@@ -18,7 +18,7 @@ function MethodSwitch() {
             case integrationMethods.MIDPOINT_RULE:
                 return <>Midpoint Integration</>;
             case integrationMethods.TRAPEZOIDAL_RULE:
-                return TrapezodialEstimation();
+                return TrapezodialEstimation('x^2', 0, 2, 3);
             case integrationMethods.SIMPSON_RULE:
                 return <>Simpson</>;
             default:
