@@ -13,26 +13,10 @@ function LatexString(
     estimation,
     latexString,
 ) {
-    if (interval > 3) {
-        return (
-            <div className="Estimation">
-                <p>Formula</p>
-                <LaTex tex={func} />
-                <br />
-                <p>Estimation</p>
-                <LaTex tex={estimation} />
-                <br />
-                <p>Quadrature Function</p>
-                <LaTex tex="\tiny\int_{a}^{b}f(x)dx\approx\frac{(b-a)}{2n}\left[f(x_{0})+2f(x_{1})+2f(x_{2})+\cdots +2f(x_{n-1})+f(x_{n})\right]" />
-                <br />
-                <p>Actual Estimation</p>
-                <LaTex tex={latexString} />
-            </div>
-        );
-    }
     let latex = latexString;
-    latex = `\\scriptsize\\int_{${x0}}^{${xn}}f(x)dx\\approx\\frac{(${xn}-${x0})}{${h}}\\left[f(${x0})+2f(${x1})+2f(${x2})+f(${xn})\\right]`;
-
+    if (interval <= 3) {
+        latex = `\\scriptsize\\int_{${x0}}^{${xn}}f(x)dx\\approx\\frac{(${xn}-${x0})}{${h}}\\left[f(${x0})+2f(${x1})+2f(${x2})+f(${xn})\\right]`;
+    }
     return (
         <div className="Estimation">
             <p>Formula</p>
