@@ -18,3 +18,11 @@ export const integrationMethods = {
     TRAPEZOIDAL_RULE: 'trapezoidal rule',
     SIMPSON_RULE: 'simpson rule',
 };
+
+export const graphDispatchActions = {
+    UPDATE_FUNC: 'update_func',
+    UPDATE_LOWER_LIMIT: 'update_lower_limit',
+    UPDATE_UPPER_LIMIT: 'update_upper_limit',
+    UPDATE_METHOD: 'update_method',
+    TOGGLE_UPDATE: 'toggle_update',
+};
