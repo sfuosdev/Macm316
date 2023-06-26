@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Menu from './components/menu/Menu';
 import Calculator from './components/calculator/Calculator';
 import { CalculatorContextProvider } from './context/calculatorContext';
+import ThemeProvider from './context/ThemeProvider';
 
 const PageContainer = styled.div`
     display: flex;
@@ -23,16 +24,18 @@ const CalculatorContainer = styled.div`
 function App() {
     return (
         <PageContainer>
-            <CalculatorContextProvider>
-                <>
-                    <MenuContainer>
-                        <Menu />
-                    </MenuContainer>
-                    <CalculatorContainer>
-                        <Calculator />
-                    </CalculatorContainer>
-                </>
-            </CalculatorContextProvider>
+            <ThemeProvider>
+                <CalculatorContextProvider>
+                    <>
+                        <MenuContainer>
+                            <Menu />
+                        </MenuContainer>
+                        <CalculatorContainer>
+                            <Calculator />
+                        </CalculatorContainer>
+                    </>
+                </CalculatorContextProvider>
+            </ThemeProvider>
         </PageContainer>
     );
 }
