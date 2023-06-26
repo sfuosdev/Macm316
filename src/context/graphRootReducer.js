@@ -3,7 +3,6 @@ import { differentiationMethods, integrationMethods } from './constants';
 import middlePointReducer, {
     initialMiddlePointState,
 } from './MiddlePointReducer';
-
 import lagrangeReducer, { initialLagrangeState } from './LagrangeReducer';
 import midPointReducer, { initialMidPointState } from './MidPointReducer';
 import simpsonReducer, { initialSimpsonState } from './SimpsonReducer';

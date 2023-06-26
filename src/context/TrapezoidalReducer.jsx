@@ -3,15 +3,16 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions } from './constants';
 
 export const initialTrapezoidalState = {
-    start: 0,
-    end: 10,
-    numberOfSteps: 100,
+    fn: null,
+    lowerLimit: 0,
+    upperLimit: 1,
+    interval: 1,
 };
 
 const trapezoidalStateSchema = Joi.object({
-    start: Joi.number().required(),
-    end: Joi.number().required(),
-    numberOfSteps: Joi.number().integer().positive().required(),
+    upperLimit: Joi.number().required(),
+    lowerLimit: Joi.number().required(),
+    interval: Joi.number().integer().positive().required(),
 });
 /* eslint-disable default-param-last */
 function trapezoidalReducer(state = initialTrapezoidalState, action) {
@@ -19,14 +20,17 @@ function trapezoidalReducer(state = initialTrapezoidalState, action) {
     let newState;
 
     switch (action.type) {
-        case graphDispatchActions.UPDATE_START:
-            newState = { ...state, start: action.value };
+        case graphDispatchActions.UPDATE_FN:
+            newState = { ...state, fn: action.payload };
             break;
-        case graphDispatchActions.UPDATE_END:
-            newState = { ...state, end: action.value };
+        case graphDispatchActions.UPDATE_LOWER_LIMIT:
+            newState = { ...state, lowerLimit: action.value };
             break;
-        case graphDispatchActions.UPDATE_STEPS:
-            newState = { ...state, numberOfSteps: action.value };
+        case graphDispatchActions.UPDATE_UPPER_LIMIT:
+            newState = { ...state, upperLimit: action.value };
+            break;
+        case graphDispatchActions.UPDATE_NUMBER_OF_INTERVAL:
+            newState = { ...state, interval: action.value };
             break;
         default:
             throw new Error(`Unhandled action type: ${action.type}`);

@@ -3,16 +3,18 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions } from './constants';
 
 export const initialLagrangeState = {
-    start: 0,
-    end: 10,
+    fn: null,
+    lowerLimit: 0,
+    upperLimit: 10,
+    // 폼 내용에 따라 하기 point 파트들은 자유롭게 변환.
     point1: 1,
     point2: 5,
     point3: 9,
 };
 
 const lagrangeStateSchema = Joi.object({
-    start: Joi.number().required(),
-    end: Joi.number().required(),
+    lowerLimit: Joi.number().required(),
+    upperLimit: Joi.number().required(),
     point1: Joi.number().required(),
     point2: Joi.number().required(),
     point3: Joi.number().required(),
@@ -24,11 +26,14 @@ function lagrangeReducer(state = initialLagrangeState, action) {
     let newState;
 
     switch (action.type) {
-        case graphDispatchActions.UPDATE_START:
-            newState = { ...state, start: action.value };
+        case graphDispatchActions.UPDATE_FN:
+            newState = { ...state, fn: action.payload };
             break;
-        case graphDispatchActions.UPDATE_END:
-            newState = { ...state, end: action.value };
+        case graphDispatchActions.UPDATE_LOWER_LIMIT:
+            newState = { ...state, lowerLimit: action.value };
+            break;
+        case graphDispatchActions.UPDATE_UPPER_LIMIT:
+            newState = { ...state, upperLimit: action.value };
             break;
         case graphDispatchActions.UPDATE_POINT1:
             newState = { ...state, point1: action.value };
