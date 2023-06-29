@@ -3,7 +3,7 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions } from './constants';
 
 export const initialMiddlePointState = {
-    fn: null,
+    fn: '',
     lowerLimit: 0,
     upperLimit: 10,
     interval: 100,
@@ -13,6 +13,7 @@ const middlePointStateSchema = Joi.object({
     lowerLimit: Joi.number().required(),
     upperLimit: Joi.number().required(),
     interval: Joi.number().integer().positive().required(),
+    fn: Joi.string().allow('').required(),
 });
 /* eslint-disable default-param-last */
 function middlePointReducer(state = initialMiddlePointState, action) {

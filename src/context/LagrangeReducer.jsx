@@ -3,10 +3,11 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions } from './constants';
 
 export const initialLagrangeState = {
-    fn: null,
+    fn: '',
     lowerLimit: 0,
     upperLimit: 10,
     // 폼 내용에 따라 하기 point 파트들은 자유롭게 변환.
+    // interval: 0,
     point1: 1,
     point2: 5,
     point3: 9,
@@ -15,6 +16,8 @@ export const initialLagrangeState = {
 const lagrangeStateSchema = Joi.object({
     lowerLimit: Joi.number().required(),
     upperLimit: Joi.number().required(),
+    fn: Joi.string().allow('').required(),
+    // interval: Joi.number().positive().required()
     point1: Joi.number().required(),
     point2: Joi.number().required(),
     point3: Joi.number().required(),

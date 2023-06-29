@@ -3,17 +3,17 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions } from './constants';
 
 export const initialSimpsonState = {
-    fn: null,
-    uppperLimit: 1,
+    fn: '',
+    upperLimit: 1,
     lowerLimit: 0,
     interval: 1,
 };
 
 const simpsonStateSchema = Joi.object({
     lowerLimit: Joi.number().required(),
-    uppperLimit: Joi.number().required(),
+    upperLimit: Joi.number().required(),
     interval: Joi.number().integer().positive().required(),
-    // fn:joi.string().required()
+    fn: Joi.string().allow('').required(),
 });
 /* eslint-disable default-param-last */
 function simpsonReducer(state = initialSimpsonState, action) {
@@ -28,7 +28,7 @@ function simpsonReducer(state = initialSimpsonState, action) {
             newState = { ...state, lowerLimit: action.value };
             break;
         case graphDispatchActions.UPDATE_UPPER_LIMIT:
-            newState = { ...state, uppperLimit: action.value };
+            newState = { ...state, upperLimit: action.value };
             break;
         case graphDispatchActions.UPDATE_NUMBER_OF_INTERVAL:
             newState = { ...state, interval: action.value };

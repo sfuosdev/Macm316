@@ -3,7 +3,7 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions } from './constants';
 
 export const initialTrapezoidalState = {
-    fn: null,
+    fn: '',
     lowerLimit: 0,
     upperLimit: 1,
     interval: 1,
@@ -13,6 +13,7 @@ const trapezoidalStateSchema = Joi.object({
     upperLimit: Joi.number().required(),
     lowerLimit: Joi.number().required(),
     interval: Joi.number().integer().positive().required(),
+    fn: Joi.string().allow('').required(),
 });
 /* eslint-disable default-param-last */
 function trapezoidalReducer(state = initialTrapezoidalState, action) {
