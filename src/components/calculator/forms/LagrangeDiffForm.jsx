@@ -11,7 +11,8 @@ const FormWrapper = styled.div`
     flex-direction: column;
 `;
 
-function DiffMiddlePointForm() {
+function LagrangeDiffForm() {
+    // context validation
     const [state, dispatch] = React.useContext(GraphStateContext);
 
     if (!state || !dispatch) {
@@ -20,9 +21,11 @@ function DiffMiddlePointForm() {
         );
     }
 
+    // handle the change of the input fields by passing to onChange
     const handleFnChange = (oldValue, newValue) => {
+        /* eslint-disable no-console */
         console.log(oldValue, newValue);
-        state.method = 'middle point rule';
+        state.method = 'lagrange polynomial three point rule';
         dispatch({
             type: graphDispatchActions.UPDATE_FN,
             payload: newValue,
@@ -32,26 +35,26 @@ function DiffMiddlePointForm() {
     const handleLowerLimitChange = (oldValue, newValue) => {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
-        state.method = 'middle point rule';
+        state.method = 'lagrange polynomial three point rule';
         dispatch({
             type: graphDispatchActions.UPDATE_LOWER_LIMIT,
-            payload: Number(newValue), // <- parse as number
+            payload: newValue,
         });
     };
 
     const handleIntervalChange = (oldValue, newValue) => {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
-        state.method = 'middle point rule';
+        state.method = 'lagrange polynomial three point rule';
         dispatch({
             type: graphDispatchActions.UPDATE_INTERVAL,
-            payload: Number(newValue), // <- parse as number
+            payload: newValue,
         });
     };
 
     return (
         <FormWrapper>
-            <div>Middle Point Differentiation</div>
+            <div>Lagrange Polynomial Differentiation</div>
             <div>
                 <LaTex tex="f(x)" />
                 <TextInput fieldName="fn" onChange={handleFnChange} />
@@ -74,4 +77,4 @@ function DiffMiddlePointForm() {
     );
 }
 
-export default DiffMiddlePointForm;
+export default LagrangeDiffForm;

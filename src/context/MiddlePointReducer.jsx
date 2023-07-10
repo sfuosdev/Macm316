@@ -5,16 +5,15 @@ import { graphDispatchActions } from './constants';
 export const initialMiddlePointState = {
     fn: '',
     lowerLimit: 0,
-    upperLimit: 10,
     interval: 100,
 };
 
 const middlePointStateSchema = Joi.object({
     lowerLimit: Joi.number().required(),
-    upperLimit: Joi.number().required(),
     interval: Joi.number().integer().positive().required(),
     fn: Joi.string().allow('').required(),
 });
+
 /* eslint-disable default-param-last */
 function middlePointReducer(state = initialMiddlePointState, action) {
     /* eslint-enable default-param-last */
@@ -25,13 +24,10 @@ function middlePointReducer(state = initialMiddlePointState, action) {
             newState = { ...state, fn: action.payload };
             break;
         case graphDispatchActions.UPDATE_LOWER_LIMIT:
-            newState = { ...state, lowerLimit: action.value };
+            newState = { ...state, lowerLimit: action.payload };
             break;
-        case graphDispatchActions.UPDATE_UPPER_LIMIT:
-            newState = { ...state, upperLimit: action.value };
-            break;
-        case graphDispatchActions.UPDATE_NUMBER_OF_INTERVAL:
-            newState = { ...state, interval: action.value };
+        case graphDispatchActions.UPDATE_INTERVAL:
+            newState = { ...state, interval: action.payload };
             break;
         default:
             throw new Error(`Unhandled action type: ${action.type}`);

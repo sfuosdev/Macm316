@@ -8,8 +8,6 @@ import {
 } from '../../context/constants';
 import Estimation from './Estimation';
 import DiffMiddlePointForm from './forms/DiffMiddlePointForm';
-import LagrangeDiffForm from './forms/LagrangeDiffForm';
-import { GraphContextProvider } from '../../context/graphContext';
 import InteTrapezoidalForm from './forms/InteTrapezoidalForm';
 
 function DifferentiationForm() {
@@ -18,17 +16,9 @@ function DifferentiationForm() {
     function forMethod() {
         switch (state.method) {
             case differentiationMethods.MIDDLE_POINT:
-                return (
-                    <GraphContextProvider>
-                        <DiffMiddlePointForm />
-                    </GraphContextProvider>
-                );
+                return <DiffMiddlePointForm />;
             case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
-                return (
-                    <GraphContextProvider>
-                        <LagrangeDiffForm />
-                    </GraphContextProvider>
-                );
+                return <>2</>;
             default:
                 return null;
         }

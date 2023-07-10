@@ -21,7 +21,7 @@ describe('MiddlePointReducer', () => {
         const newValue = 0;
         const action = {
             type: graphDispatchActions.UPDATE_LOWER_LIMIT,
-            value: newValue,
+            payload: newValue,
         };
         const updatedState = middlePointReducer(
             initialMiddlePointState,
@@ -30,16 +30,16 @@ describe('MiddlePointReducer', () => {
         expect(updatedState.lowerLimit).toBe(newValue);
     });
 
-    it('should handle UPDATE_UPPER_LIMIT', () => {
-        const newValue = 5;
+    it('should handle UPDATE_INTERVAL', () => {
+        const newValue = 3;
         const action = {
-            type: graphDispatchActions.UPDATE_UPPER_LIMIT,
-            value: newValue,
+            type: graphDispatchActions.UPDATE_INTERVAL,
+            payload: newValue,
         };
         const updatedState = middlePointReducer(
             initialMiddlePointState,
             action,
         );
-        expect(updatedState.upperLimit).toBe(newValue);
+        expect(updatedState.interval).toBe(newValue);
     });
 });
