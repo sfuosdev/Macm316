@@ -4,7 +4,7 @@ import {
     differentiationMethods,
     integrationMethods,
 } from '../../context/constants';
-import TrapezodialEstimation from './TrapezoidalEstimation';
+import TrapezodialEstimation from './estimations/TrapezoidalEstimation';
 
 function MethodSwitch() {
     const [state] = useCalculatorState();

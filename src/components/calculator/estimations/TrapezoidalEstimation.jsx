@@ -1,6 +1,6 @@
 import React from 'react';
-import trapezoidal from '../../lib/trapezoidal';
-import LaTex from './Latex';
+import trapezoidal from '../../../lib/trapezoidal';
+import LaTex from '../Latex';
 
 function LatexString(func, estimation, latexString) {
     return (
