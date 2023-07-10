@@ -11,9 +11,9 @@ export const initialMidPointState = {
 
 const midPointStateSchema = Joi.object({
     lowerLimit: Joi.number().required(),
-    upperLimit: Joi.number().required(),
     interval: Joi.number().integer().positive().required(),
     fn: Joi.string().allow('').required(),
+    method: Joi.string().required(),
 });
 
 /* eslint-disable default-param-last */
