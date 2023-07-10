@@ -17,7 +17,11 @@ function DifferentiationForm() {
     function forMethod() {
         switch (state.method) {
             case differentiationMethods.MIDDLE_POINT:
-                return <DiffMiddlePointForm />;
+                return (
+                    <GraphContextProvider>
+                        <DiffMiddlePointForm />
+                    </GraphContextProvider>
+                );
             case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
                 return (
                     <GraphContextProvider>

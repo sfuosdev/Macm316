@@ -12,10 +12,17 @@ const FormWrapper = styled.div`
 `;
 
 function DiffMiddlePointForm() {
-    const [, dispatch] = React.useContext(GraphStateContext);
+    const [state, dispatch] = React.useContext(GraphStateContext);
+
+    if (!state || !dispatch) {
+        throw new Error(
+            'Form must be wrapped in a GraphContextProvider component',
+        );
+    }
 
     const handleFnChange = (oldValue, newValue) => {
         console.log(oldValue, newValue);
+        state.method = 'middle point rule';
         dispatch({
             type: graphDispatchActions.UPDATE_FN,
             payload: newValue,
@@ -25,7 +32,7 @@ function DiffMiddlePointForm() {
     const handleLowerLimitChange = (oldValue, newValue) => {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
-
+        state.method = 'middle point rule';
         dispatch({
             type: graphDispatchActions.UPDATE_LOWER_LIMIT,
             payload: Number(newValue), // <- parse as number
@@ -35,7 +42,7 @@ function DiffMiddlePointForm() {
     const handleIntervalChange = (oldValue, newValue) => {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
-
+        state.method = 'middle point rule';
         dispatch({
             type: graphDispatchActions.UPDATE_INTERVAL,
             payload: Number(newValue), // <- parse as number
