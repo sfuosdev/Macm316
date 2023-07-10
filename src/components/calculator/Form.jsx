@@ -8,6 +8,7 @@ import {
 } from '../../context/constants';
 import Estimation from './Estimation';
 import DiffMiddlePointForm from './forms/DiffMiddlePointForm';
+import InteTrapezoidalForm from './forms/InteTrapezoidalForm';
 
 function DifferentiationForm() {
     const [state] = useCalculatorState();
@@ -34,7 +35,7 @@ function IntegrationForm() {
             case integrationMethods.MIDPOINT_RULE:
                 return <>3</>;
             case integrationMethods.TRAPEZOIDAL_RULE:
-                return <>4</>;
+                return <InteTrapezoidalForm />;
             case integrationMethods.SIMPSON_RULE:
                 return <>5</>;
             default:
