@@ -21,7 +21,6 @@ function DiffMiddlePointForm() {
     }
 
     const handleFnChange = (oldValue, newValue) => {
-        console.log(oldValue, newValue);
         state.method = 'middle point rule';
         dispatch({
             type: graphDispatchActions.UPDATE_FN,

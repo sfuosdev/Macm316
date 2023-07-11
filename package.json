@@ -21,7 +21,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "prettier": "prettier --write src/**/*.js{,x}",
+        "prettier": "prettier --write src",
         "lint": "eslint src/**/*.js{,x}",
         "lint:fix": "eslint --fix src/**/*.js{,x}",
         "prepare": "husky install"

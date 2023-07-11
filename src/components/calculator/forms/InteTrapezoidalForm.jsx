@@ -7,12 +7,14 @@ const FormWrapper = styled.div`
     flex-direction: column;
 `;
 
+/*
 function Validation (props) {
     const pattern = /^[a-zA-Z0-9]+$/;
     if (!pattern.test(props)) {
         alert("Input must be a number, Special characters are not allowed.");
     }
 }
+*/
 
 function InteTrapezoidalForm() {
     // const [startPoint, setStartPoint] = useState('');
@@ -47,7 +49,9 @@ function InteTrapezoidalForm() {
                 <TextInput fieldName="x end point " />
                 <TextInput fieldName="Number of interval " />
             </div>
-            <button type="submit" onClick={Calculate}>Calculate</button>
+            <button type="submit" onClick={Calculate}>
+                Calculate
+            </button>
         </FormWrapper>
     );
 }
