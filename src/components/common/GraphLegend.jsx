@@ -9,6 +9,8 @@ function GraphLegend({ data }) {
                 border: '1px solid #ccc',
                 padding: '10px',
                 display: 'inline-block',
+                zIndex: 1,
+                backgroundColor: 'white',
             }}
         >
             {data.map((item) => (
