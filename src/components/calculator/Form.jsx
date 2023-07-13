@@ -11,6 +11,7 @@ import DiffMiddlePointForm from './forms/DiffMiddlePointForm';
 import LagrangeDiffForm from './forms/LagrangeDiffForm';
 import { GraphContextProvider } from '../../context/graphContext';
 import InteTrapezoidalForm from './forms/InteTrapezoidalForm';
+import SimpsonForm from './forms/InteSimpsonForm';
 
 function DifferentiationForm() {
     const [state] = useCalculatorState();
@@ -47,7 +48,11 @@ function IntegrationForm() {
             case integrationMethods.TRAPEZOIDAL_RULE:
                 return <InteTrapezoidalForm />;
             case integrationMethods.SIMPSON_RULE:
-                return <>5</>;
+                return (
+                    <GraphContextProvider>
+                        <SimpsonForm />
+                    </GraphContextProvider>
+                );
             default:
                 return null;
         }
