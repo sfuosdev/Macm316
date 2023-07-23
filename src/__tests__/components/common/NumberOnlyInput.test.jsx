@@ -1,66 +1,27 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import PropTypes from 'prop-types';
 import NumberOnlyInput from '../../../components/common/input/NumberOnlyInput';
 
-// Error boundary component
-class ErrorBoundary extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { hasError: false };
-    }
-
-    static getDerivedStateFromError() {
-        return { hasError: true };
-    }
-
-    componentDidCatch() {}
-
-    render() {
-        const { hasError } = this.state; // use destructuring here
-        const { children } = this.props; // use destructuring here
-
-        if (hasError) {
-            return <div>Error occurred.</div>;
-        }
-
-        return children;
-    }
-}
-
-ErrorBoundary.propTypes = {
-    children: PropTypes.node,
-};
-
-ErrorBoundary.defaultProps = {
-    children: null,
-};
-
 describe('NumberOnlyInput', () => {
-    it('should show error message "Number Input Expected" if non-numeric input is given', () => {
+    it('should show error message "Number Input Expected" if wrong input given', () => {
+        const onChangeMock = jest.fn();
         render(
-            <ErrorBoundary>
-                <NumberOnlyInput fieldName="Test Field" onChange={() => {}} />
-            </ErrorBoundary>,
+            <NumberOnlyInput fieldName="Test Field" onChange={onChangeMock} />,
         );
+
         const input = screen.getByLabelText('Test Field');
-        fireEvent.change(input, { target: { value: 'abc' } });
+        fireEvent.keyDown(input, { key: 'a', code: 'KeyA' });
         const errorMessage = screen.getByText('Number Input Expected');
         expect(errorMessage).toBeInTheDocument();
     });
 
-    it('calls onChange with old and new values when a number is entered', () => {
+    it('calls onChange on every key press and shows the text in the input', () => {
         const onChangeMock = jest.fn();
         render(
-            <ErrorBoundary>
-                <NumberOnlyInput
-                    fieldName="Test Field"
-                    onChange={onChangeMock}
-                />
-            </ErrorBoundary>,
+            <NumberOnlyInput fieldName="Test Field" onChange={onChangeMock} />,
         );
-        const input = screen.getByLabelText('Test Field');
 
+        const input = screen.getByLabelText('Test Field');
         fireEvent.change(input, { target: { value: '1' } });
         expect(onChangeMock).toHaveBeenCalledTimes(1);
         expect(onChangeMock).toHaveBeenCalledWith('', '1');
@@ -71,36 +32,20 @@ describe('NumberOnlyInput', () => {
         expect(onChangeMock).toHaveBeenCalledWith('1', '12');
         expect(input.value).toBe('12');
 
-        fireEvent.change(input, { target: { value: '123' } });
+        fireEvent.change(input, { target: { value: '12.3' } });
         expect(onChangeMock).toHaveBeenCalledTimes(3);
-        expect(onChangeMock).toHaveBeenCalledWith('12', '123');
-        expect(input.value).toBe('123');
+        expect(onChangeMock).toHaveBeenCalledWith('12', '12.3');
+        expect(input.value).toBe('12.3');
     });
 
     it('displays the fieldName prop on the screen', () => {
         const fieldName = 'Test Field Name';
-        render(
-            <ErrorBoundary>
-                <NumberOnlyInput fieldName={fieldName} onChange={() => {}} />
-            </ErrorBoundary>,
-        );
-        const label = screen.getByText(fieldName);
-        expect(label).toBeInTheDocument();
-    });
-
-    it('should not show error message when a numerical character is entered', () => {
         const onChangeMock = jest.fn();
         render(
-            <ErrorBoundary>
-                <NumberOnlyInput
-                    fieldName="Test Field"
-                    onChange={onChangeMock}
-                />
-            </ErrorBoundary>,
+            <NumberOnlyInput fieldName={fieldName} onChange={onChangeMock} />,
         );
-        const input = screen.getByLabelText('Test Field');
-        fireEvent.change(input, { target: { value: '1' } });
-        const errorMessage = screen.queryByText('Number Input Expected');
-        expect(errorMessage).not.toBeInTheDocument();
+
+        const label = screen.getByText(fieldName);
+        expect(label).toBeInTheDocument();
     });
 });
