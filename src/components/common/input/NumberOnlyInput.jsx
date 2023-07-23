@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { act } from '@testing-library/react';
 
 function NumberOnlyInput({ onChange, fieldName }) {
     const [value, setValue] = useState('');
@@ -10,30 +9,23 @@ function NumberOnlyInput({ onChange, fieldName }) {
         const newValue = e.target.value;
         const oldValue = value;
 
-        act(() => {
-            // Check if the new value is numeric.
-            if (Number.isNaN(Number(newValue))) {
-                setShowErrorMessage(true);
-            } else {
-                setShowErrorMessage(false);
-                onChange(oldValue, newValue);
-                setValue(newValue);
-            }
-        });
+        onChange(oldValue, newValue);
+        setValue(newValue);
     };
 
     const handleKeyPress = (e) => {
         const charCode = e.which || e.keyCode;
-        const charStr = String.fromCharCode(charCode);
 
-        act(() => {
-            if (!/^[0-9]+$/.test(charStr) && charCode !== 8) {
-                e.preventDefault();
-                setShowErrorMessage(true);
-            } else {
-                setShowErrorMessage(false);
-            }
-        });
+        // allow digits, single dot and backspace
+        if (
+            !((charCode >= 48 && charCode <= 57) || charCode === 190) &&
+            charCode !== 8
+        ) {
+            e.preventDefault();
+            setShowErrorMessage(true);
+        } else {
+            setShowErrorMessage(false);
+        }
     };
 
     return (

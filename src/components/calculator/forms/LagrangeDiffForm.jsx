@@ -13,7 +13,7 @@ const FormWrapper = styled.div`
 
 function LagrangeDiffForm() {
     // context validation
-    const [state, dispatch] = GraphStateContext();
+    const [state, dispatch] = React.useContext(GraphStateContext);
 
     if (!state || !dispatch) {
         throw new Error(
