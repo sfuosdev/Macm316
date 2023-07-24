@@ -5,6 +5,7 @@ import {
     integrationMethods,
 } from '../../context/constants';
 import TrapezodialEstimation from './estimations/TrapezoidalEstimation';
+import SimpsonIntegrationEstimation from './estimations/SimpsonEstimation';
 
 function MethodSwitch() {
     const [state] = useCalculatorState();
@@ -20,7 +21,7 @@ function MethodSwitch() {
             case integrationMethods.TRAPEZOIDAL_RULE:
                 return TrapezodialEstimation('sin(x)', 0, Math.PI, 10);
             case integrationMethods.SIMPSON_RULE:
-                return <>Simpson</>;
+                return SimpsonIntegrationEstimation('sin(x)', 0, Math.PI, 10);
             default:
                 return null;
         }
