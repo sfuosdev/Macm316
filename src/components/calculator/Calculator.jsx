@@ -2,8 +2,13 @@ import React from 'react';
 import functionPlot from 'function-plot';
 
 import useCalculatorState from '../../hooks/useCalculatorState';
-import { calculatorModes, integrationMethods } from '../../context/constants';
+import {
+    calculatorModes,
+    integrationMethods,
+    differentiationMethods,
+} from '../../context/constants';
 import TrapezoidalGraph from './graphs/TrapezoidalGraph';
+import MidpointDiffGraph from './graphs/MidpointDiffGraph';
 
 setTimeout(() => {
     functionPlot({
@@ -24,6 +29,21 @@ setTimeout(() => {
     const graph = document.getElementsByTagName('svg');
     graph[0].setAttribute('viewBox', '0 0 1050 750');
 }, 1000);
+
+function DifferntiationCalc() {
+    const [state] = useCalculatorState();
+
+    switch (state.method) {
+        case differentiationMethods.MIDDLE_POINT:
+            MidpointDiffGraph('exp(x)', 0, 1);
+            break;
+        case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
+            // Lagrange function call
+            break;
+        default:
+            return null;
+    }
+}
 
 function IntegrationCalc() {
     const [state] = useCalculatorState();
@@ -47,6 +67,8 @@ function GraphingCalculator(props) {
     const [state] = useCalculatorState();
     if (state.mode === calculatorModes.NUMERICAL_INTEGRATION) {
         IntegrationCalc(props);
+    } else if (state.mode === calculatorModes.NUMERICAL_DIFFERENTIATION) {
+        DifferntiationCalc(props);
     }
     return <div id="graph" />;
 }
