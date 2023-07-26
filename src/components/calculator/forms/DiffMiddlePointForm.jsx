@@ -6,7 +6,7 @@ import LaTex from '../Latex';
 import { GraphStateContext } from '../../../context/graphContext';
 import {
     graphDispatchActions,
-    integrationMethods,
+    differentiationMethods,
 } from '../../../context/constants';
 
 const FormWrapper = styled.div`
@@ -14,7 +14,7 @@ const FormWrapper = styled.div`
     flex-direction: column;
 `;
 
-function InteMidPointForm() {
+function DiffMiddlePointForm() {
     const [state, dispatch] = React.useContext(GraphStateContext);
 
     if (!state || !dispatch) {
@@ -25,7 +25,7 @@ function InteMidPointForm() {
 
     const handleFnChange = (oldValue, newValue) => {
         dispatch({
-            type: `${integrationMethods.MIDPOINT_RULE} ${graphDispatchActions.UPDATE_FN}`,
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_FN}`,
             payload: newValue,
         });
     };
@@ -34,7 +34,7 @@ function InteMidPointForm() {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
         dispatch({
-            type: `${integrationMethods.MIDPOINT_RULE} ${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
             payload: Number(newValue), // <- parse as number
         });
     };
@@ -43,14 +43,14 @@ function InteMidPointForm() {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
         dispatch({
-            type: `${integrationMethods.MIDPOINT_RULE} ${graphDispatchActions.UPDATE_INTERVAL}`,
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_INTERVAL}`,
             payload: Number(newValue), // <- parse as number
         });
     };
 
     return (
         <FormWrapper>
-            <div>Mid Point Integration</div>
+            <div>Middle Point Differentiation</div>
             <div>
                 <LaTex tex="f(x)" />
                 <TextInput fieldName="fn" onChange={handleFnChange} />
@@ -73,4 +73,4 @@ function InteMidPointForm() {
     );
 }
 
-export default InteMidPointForm;
+export default DiffMiddlePointForm;

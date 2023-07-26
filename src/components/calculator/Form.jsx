@@ -43,8 +43,11 @@ function IntegrationForm() {
 
     function forMethod() {
         switch (state.method) {
-            case integrationMethods.MIDPOINT_RULE:
-                return <>3</>;
+            /* case integrationMethods.MIDPOINT_RULE:
+                return <GraphContextProvider>
+                    
+                </GraphContextProvider>
+            */
             case integrationMethods.TRAPEZOIDAL_RULE:
                 return <InteTrapezoidalForm />;
             case integrationMethods.SIMPSON_RULE:
