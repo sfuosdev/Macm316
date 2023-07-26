@@ -1,8 +1,11 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { GraphStateContext } from '../../../context/graphContext';
-import { graphDispatchActions } from '../../../context/constants';
-import DiffMiddlePointForm from '../../../components/calculator/forms/DiffMiddlePointForm';
+import {
+    graphDispatchActions,
+    integrationMethods,
+} from '../../../context/constants';
+import InteMidPointForm from '../../../components/calculator/forms/InteMidPointForm';
 
 // mocking initial state and dispatch
 const mockDispatch = jest.fn();
@@ -12,29 +15,27 @@ const initialState = {
     interval: 1,
 };
 
-describe('DiffMiddlePointForm', () => {
+describe('InteMidPointForm', () => {
     it('should render the form', () => {
         render(
             <GraphStateContext.Provider value={[initialState, mockDispatch]}>
-                <DiffMiddlePointForm />
+                <InteMidPointForm />
             </GraphStateContext.Provider>,
         );
-        expect(
-            screen.getByText(/Middle Point Differentiation/i),
-        ).toBeInTheDocument();
+        expect(screen.getByText(/Mid Point Integration/i)).toBeInTheDocument();
     });
 
     it('should handle input change for function', () => {
         render(
             <GraphStateContext.Provider value={[initialState, mockDispatch]}>
-                <DiffMiddlePointForm />
+                <InteMidPointForm />
             </GraphStateContext.Provider>,
         );
         const fnInput = screen.getByLabelText(/fn/i);
         fireEvent.change(fnInput, { target: { value: 'x^2' } });
 
         expect(mockDispatch).toHaveBeenCalledWith({
-            type: graphDispatchActions.UPDATE_FN,
+            type: `${integrationMethods.MIDPOINT_RULE} ${graphDispatchActions.UPDATE_FN}`,
             payload: 'x^2',
         });
     });
@@ -42,14 +43,14 @@ describe('DiffMiddlePointForm', () => {
     it('should handle input change for lower limit', () => {
         render(
             <GraphStateContext.Provider value={[initialState, mockDispatch]}>
-                <DiffMiddlePointForm />
+                <InteMidPointForm />
             </GraphStateContext.Provider>,
         );
         const lowerLimitInput = screen.getByLabelText(/lowerLimit/i);
         fireEvent.change(lowerLimitInput, { target: { value: 2 } });
 
         expect(mockDispatch).toHaveBeenCalledWith({
-            type: graphDispatchActions.UPDATE_LOWER_LIMIT,
+            type: `${integrationMethods.MIDPOINT_RULE} ${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
             payload: 2, // <- change to number
         });
     });
@@ -57,14 +58,14 @@ describe('DiffMiddlePointForm', () => {
     it('should handle input change for interval', () => {
         render(
             <GraphStateContext.Provider value={[initialState, mockDispatch]}>
-                <DiffMiddlePointForm />
+                <InteMidPointForm />
             </GraphStateContext.Provider>,
         );
         const intervalInput = screen.getByLabelText(/interval/i);
         fireEvent.change(intervalInput, { target: { value: 0.1 } });
 
         expect(mockDispatch).toHaveBeenCalledWith({
-            type: graphDispatchActions.UPDATE_INTERVAL,
+            type: `${integrationMethods.MIDPOINT_RULE} ${graphDispatchActions.UPDATE_INTERVAL}`,
             payload: 0.1, // <- change to number
         });
     });

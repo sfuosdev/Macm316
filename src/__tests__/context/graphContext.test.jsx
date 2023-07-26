@@ -27,6 +27,7 @@ describe('GraphContext', () => {
         const stateValue = screen.getByTestId('state');
         const dispatchValue = screen.getByTestId('dispatch');
 
+        // Make sure to stringify your initial state as you are comparing stringified values
         expect(stateValue.textContent).toBe(
             JSON.stringify(initialRootGraphState),
         );

@@ -22,13 +22,13 @@ function lagrangeReducer(state = initialLagrangeState, action) {
     let newState;
 
     switch (action.type) {
-        case graphDispatchActions.UPDATE_FN:
+        case `${differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT}_${graphDispatchActions.UPDATE_FN}`:
             newState = { ...state, fn: action.payload };
             break;
-        case graphDispatchActions.UPDATE_LOWER_LIMIT:
+        case `${differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`:
             newState = { ...state, lowerLimit: action.payload };
             break;
-        case graphDispatchActions.UPDATE_INTERVAL:
+        case `${differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT}_${graphDispatchActions.UPDATE_INTERVAL}`:
             newState = { ...state, interval: action.payload };
             break;
         default:

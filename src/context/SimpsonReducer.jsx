@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { ValidationError } from '../errors';
-import { graphDispatchActions } from './constants';
+import { graphDispatchActions, integrationMethods } from './constants';
 
 export const initialSimpsonState = {
     fn: '',
@@ -21,17 +21,17 @@ function simpsonReducer(state = initialSimpsonState, action) {
     let newState;
 
     switch (action.type) {
-        case graphDispatchActions.UPDATE_FN:
+        case `${integrationMethods.SIMPSON_RULE}_${graphDispatchActions.UPDATE_FN}`:
             newState = { ...state, fn: action.payload };
             break;
-        case graphDispatchActions.UPDATE_LOWER_LIMIT:
-            newState = { ...state, lowerLimit: action.value };
+        case `${integrationMethods.SIMPSON_RULE}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`:
+            newState = { ...state, lowerLimit: action.payload };
             break;
-        case graphDispatchActions.UPDATE_UPPER_LIMIT:
-            newState = { ...state, upperLimit: action.value };
+        case `${integrationMethods.SIMPSON_RULE}_${graphDispatchActions.UPDATE_UPPER_LIMIT}`:
+            newState = { ...state, upperLimit: action.payload };
             break;
-        case graphDispatchActions.UPDATE_NUMBER_OF_INTERVAL:
-            newState = { ...state, interval: action.value };
+        case `${integrationMethods.SIMPSON_RULE}_${graphDispatchActions.UPDATE_INTERVAL}`:
+            newState = { ...state, interval: action.payload };
             break;
         default:
             throw new Error(`Unhandled action type: ${action.type}`);

@@ -4,14 +4,17 @@ import TextInput from '../../common/TextInput';
 import NumberOnlyInput from '../../common/input/NumberOnlyInput';
 import LaTex from '../Latex';
 import { GraphStateContext } from '../../../context/graphContext';
-import { graphDispatchActions } from '../../../context/constants';
+import {
+    graphDispatchActions,
+    integrationMethods,
+} from '../../../context/constants';
 
 const FormWrapper = styled.div`
     display: flex;
     flex-direction: column;
 `;
 
-function DiffMiddlePointForm() {
+function InteMidPointForm() {
     const [state, dispatch] = React.useContext(GraphStateContext);
 
     if (!state || !dispatch) {
@@ -21,9 +24,8 @@ function DiffMiddlePointForm() {
     }
 
     const handleFnChange = (oldValue, newValue) => {
-        state.method = 'middle point rule';
         dispatch({
-            type: graphDispatchActions.UPDATE_FN,
+            type: `${integrationMethods.MIDPOINT_RULE} ${graphDispatchActions.UPDATE_FN}`,
             payload: newValue,
         });
     };
@@ -31,9 +33,8 @@ function DiffMiddlePointForm() {
     const handleLowerLimitChange = (oldValue, newValue) => {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
-        state.method = 'middle point rule';
         dispatch({
-            type: graphDispatchActions.UPDATE_LOWER_LIMIT,
+            type: `${integrationMethods.MIDPOINT_RULE} ${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
             payload: Number(newValue), // <- parse as number
         });
     };
@@ -41,16 +42,15 @@ function DiffMiddlePointForm() {
     const handleIntervalChange = (oldValue, newValue) => {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
-        state.method = 'middle point rule';
         dispatch({
-            type: graphDispatchActions.UPDATE_INTERVAL,
+            type: `${integrationMethods.MIDPOINT_RULE} ${graphDispatchActions.UPDATE_INTERVAL}`,
             payload: Number(newValue), // <- parse as number
         });
     };
 
     return (
         <FormWrapper>
-            <div>Middle Point Differentiation</div>
+            <div>Mid Point Integration</div>
             <div>
                 <LaTex tex="f(x)" />
                 <TextInput fieldName="fn" onChange={handleFnChange} />
@@ -73,4 +73,4 @@ function DiffMiddlePointForm() {
     );
 }
 
-export default DiffMiddlePointForm;
+export default InteMidPointForm;
