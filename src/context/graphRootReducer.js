@@ -22,55 +22,33 @@ export const initialRootGraphState = {
 /* eslint-disable default-param-last */
 function rootReducer(state = initialRootGraphState, action) {
     /* eslint-enable default-param-last */
-    switch (state.method) {
-        case differentiationMethods.MIDDLE_POINT:
-            return {
-                ...state,
-                [differentiationMethods.MIDDLE_POINT]: middlePointReducer(
-                    state[differentiationMethods.MIDDLE_POINT],
-                    action,
-                ),
-            };
-        case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
-            return {
-                ...state,
-                [differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT]:
-                    lagrangeReducer(
-                        state[
-                            differentiationMethods
-                                .LAGRANGE_POLYNOMIAL_THREE_POINT
-                        ],
-                        action,
-                    ),
-            };
-        case integrationMethods.MIDPOINT_RULE:
-            return {
-                ...state,
-                [integrationMethods.MIDPOINT_RULE]: midPointReducer(
-                    state[integrationMethods.MIDPOINT_RULE],
-                    action,
-                ),
-            };
-        case integrationMethods.SIMPSON_RULE:
-            return {
-                ...state,
-                [integrationMethods.SIMPSON_RULE]: simpsonReducer(
-                    state[integrationMethods.SIMPSON_RULE],
-                    action,
-                ),
-            };
-        case integrationMethods.TRAPEZOIDAL_RULE:
-            return {
-                ...state,
-                [integrationMethods.TRAPEZOIDAL_RULE]: trapezoidalReducer(
-                    state[integrationMethods.TRAPEZOIDAL_RULE],
-                    action,
-                ),
-            };
 
-        default:
-            throw new Error(`Unhandled method type: ${state.method}`);
+    const newState = { ...state };
+    let method;
+
+    if (action.type.startsWith(differentiationMethods.MIDDLE_POINT)) {
+        method = differentiationMethods.MIDDLE_POINT;
+        newState[method] = middlePointReducer(newState[method], action);
+    } else if (
+        action.type.startsWith(
+            differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT,
+        )
+    ) {
+        method = differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT;
+        newState[method] = lagrangeReducer(newState[method], action);
+    } else if (action.type.startsWith(integrationMethods.MIDPOINT_RULE)) {
+        method = integrationMethods.MIDPOINT_RULE;
+        newState[method] = midPointReducer(newState[method], action);
+    } else if (action.type.startsWith(integrationMethods.SIMPSON_RULE)) {
+        method = integrationMethods.SIMPSON_RULE;
+        newState[method] = simpsonReducer(newState[method], action);
+    } else if (action.type.startsWith(integrationMethods.TRAPEZOIDAL_RULE)) {
+        method = integrationMethods.TRAPEZOIDAL_RULE;
+        newState[method] = trapezoidalReducer(newState[method], action);
+    } else {
+        throw new Error(`Unhandled action type: ${action.type}`);
     }
-}
 
+    return newState;
+}
 export default rootReducer;

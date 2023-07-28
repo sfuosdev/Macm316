@@ -1,7 +1,10 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { GraphStateContext } from '../../../context/graphContext';
-import { graphDispatchActions } from '../../../context/constants';
+import {
+    differentiationMethods,
+    graphDispatchActions,
+} from '../../../context/constants';
 import DiffMiddlePointForm from '../../../components/calculator/forms/DiffMiddlePointForm';
 
 // mocking initial state and dispatch
@@ -34,7 +37,7 @@ describe('DiffMiddlePointForm', () => {
         fireEvent.change(fnInput, { target: { value: 'x^2' } });
 
         expect(mockDispatch).toHaveBeenCalledWith({
-            type: graphDispatchActions.UPDATE_FN,
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_FN}`,
             payload: 'x^2',
         });
     });
@@ -49,7 +52,7 @@ describe('DiffMiddlePointForm', () => {
         fireEvent.change(lowerLimitInput, { target: { value: 2 } });
 
         expect(mockDispatch).toHaveBeenCalledWith({
-            type: graphDispatchActions.UPDATE_LOWER_LIMIT,
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
             payload: 2, // <- change to number
         });
     });
@@ -64,7 +67,7 @@ describe('DiffMiddlePointForm', () => {
         fireEvent.change(intervalInput, { target: { value: 0.1 } });
 
         expect(mockDispatch).toHaveBeenCalledWith({
-            type: graphDispatchActions.UPDATE_INTERVAL,
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_INTERVAL}`,
             payload: 0.1, // <- change to number
         });
     });

@@ -4,7 +4,10 @@ import TextInput from '../../common/TextInput';
 import NumberOnlyInput from '../../common/input/NumberOnlyInput';
 import LaTex from '../Latex';
 import { GraphStateContext } from '../../../context/graphContext';
-import { graphDispatchActions } from '../../../context/constants';
+import {
+    graphDispatchActions,
+    differentiationMethods,
+} from '../../../context/constants';
 
 const FormWrapper = styled.div`
     display: flex;
@@ -21,9 +24,8 @@ function DiffMiddlePointForm() {
     }
 
     const handleFnChange = (oldValue, newValue) => {
-        state.method = 'middle point rule';
         dispatch({
-            type: graphDispatchActions.UPDATE_FN,
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_FN}`,
             payload: newValue,
         });
     };
@@ -31,9 +33,8 @@ function DiffMiddlePointForm() {
     const handleLowerLimitChange = (oldValue, newValue) => {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
-        state.method = 'middle point rule';
         dispatch({
-            type: graphDispatchActions.UPDATE_LOWER_LIMIT,
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
             payload: Number(newValue), // <- parse as number
         });
     };
@@ -41,9 +42,8 @@ function DiffMiddlePointForm() {
     const handleIntervalChange = (oldValue, newValue) => {
         /* eslint-disable no-console */
         console.log(oldValue, newValue);
-        state.method = 'middle point rule';
         dispatch({
-            type: graphDispatchActions.UPDATE_INTERVAL,
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_INTERVAL}`,
             payload: Number(newValue), // <- parse as number
         });
     };

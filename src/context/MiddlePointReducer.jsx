@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { ValidationError } from '../errors';
-import { graphDispatchActions } from './constants';
+import { graphDispatchActions, differentiationMethods } from './constants';
 
 export const initialMiddlePointState = {
     fn: '',
@@ -20,13 +20,13 @@ function middlePointReducer(state = initialMiddlePointState, action) {
     let newState;
 
     switch (action.type) {
-        case graphDispatchActions.UPDATE_FN:
+        case `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_FN}`:
             newState = { ...state, fn: action.payload };
             break;
-        case graphDispatchActions.UPDATE_LOWER_LIMIT:
+        case `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`:
             newState = { ...state, lowerLimit: action.payload };
             break;
-        case graphDispatchActions.UPDATE_INTERVAL:
+        case `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_INTERVAL}`:
             newState = { ...state, interval: action.payload };
             break;
         default:
