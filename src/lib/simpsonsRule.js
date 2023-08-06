@@ -1,10 +1,10 @@
 import { create, all } from 'mathjs';
 
-function simpsonsRule(f, xStart, xEnd, n) {
-    const math = create(all);
-    const parser = math.parser();
-    parser.evaluate(`f(x) = ${f}`);
+const math = create(all);
+const parser = math.parser();
 
+function simpsonsRule(f, xStart, xEnd, n) {
+    parser.evaluate(`f(x) = ${f}`);
     let numOfIntervals = n;
 
     if (numOfIntervals % 2 !== 0) {
@@ -35,4 +35,44 @@ function simpsonsRule(f, xStart, xEnd, n) {
     return integral;
 }
 
-export default simpsonsRule;
+function simpsonsPolynomial(f, xStart, xEnd, n) {
+    if (f === '') return '';
+
+    parser.set('xStart', xStart);
+    parser.set('xEnd', xEnd);
+    parser.set('n', n);
+
+    const h = parser.evaluate('(xEnd - xStart) / n');
+
+    const x = [];
+
+    let simpsons = `${h}/3*(`;
+
+    for (let i = 0; i <= n; i += 1) {
+        x[i] = xStart + i * h;
+        parser.set('x', x[i]);
+    }
+
+    for (let i = 0; i <= n; i += 1) {
+        if (i === 0) {
+            simpsons += `f(${x[i]}`;
+        } else if (i % 2 !== 0) {
+            simpsons += `+4*f(${x[i]})`;
+        } else if (i === n) {
+            simpsons += `+f(${x[i]})`;
+        } else {
+            simpsons += `+2*f(${x[i]})`;
+        }
+
+        if (i === n) {
+            simpsons += '';
+        } else {
+            simpsons += ')';
+        }
+    }
+
+    simpsons += ')';
+    return simpsons;
+}
+
+export { simpsonsRule, simpsonsPolynomial };
