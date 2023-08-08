@@ -1,5 +1,5 @@
 import React from 'react';
-import simpsonsRule from '../../../lib/simpsonsRule';
+import { simpsonsRule } from '../../../lib/simpsonsRule';
 import LaTex from '../Latex';
 
 function SimpsonIntegrationEstimation(func, xStart, xEnd, n) {
