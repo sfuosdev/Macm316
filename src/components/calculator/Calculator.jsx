@@ -9,6 +9,7 @@ import {
 } from '../../context/constants';
 import TrapezoidalGraph from './graphs/TrapezoidalGraph';
 import MidpointDiffGraph from './graphs/MidpointDiffGraph';
+import CompositeSimpsonGraph from './graphs/CompositeSimpsonGraph';
 
 setTimeout(() => {
     functionPlot({
@@ -53,7 +54,7 @@ function IntegrationCalc() {
             // midpointGraph
             break;
         case integrationMethods.SIMPSON_RULE:
-            // simpsonGraph
+            CompositeSimpsonGraph('x^5+2*x^2+3x', -1, 2, 10);
             break;
         case integrationMethods.TRAPEZOIDAL_RULE:
             TrapezoidalGraph('5*sin(x)', 0, 2, 10);
