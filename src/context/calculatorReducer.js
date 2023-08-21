@@ -18,7 +18,7 @@ export const initialCalculatorState = {
 const defaultMethod = (mode) =>
     mode === calculatorModes.NUMERICAL_DIFFERENTIATION
         ? differentiationMethods.MIDDLE_POINT
-        : integrationMethods.MIDPOINT_RULE;
+        : integrationMethods.TRAPEZOIDAL_RULE;
 
 /**
  * Calculator Context State Schema

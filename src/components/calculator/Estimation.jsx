@@ -14,11 +14,9 @@ function MethodSwitch() {
     function forMethod() {
         switch (state.method) {
             case differentiationMethods.MIDDLE_POINT:
-                return <>Midpoint Differentiation</>;
+                return <>Estimation</>;
             case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
                 return LagrangeEstimation('sin(x)', 0, 1, Math.PI);
-            case integrationMethods.MIDPOINT_RULE:
-                return <>Midpoint Integration</>;
             case integrationMethods.TRAPEZOIDAL_RULE:
                 return TrapezodialEstimation('sin(x)', 0, Math.PI, 10);
             case integrationMethods.SIMPSON_RULE:

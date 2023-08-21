@@ -10,13 +10,13 @@ export const calculatorDispatchActions = {
     UPDATE_METHOD: 'update_method',
 };
 export const differentiationMethods = {
-    MIDDLE_POINT: 'middle point',
-    LAGRANGE_POLYNOMIAL_THREE_POINT: 'lagrange polynomial three point rule',
+    MIDDLE_POINT: 'middle_point_diff',
+    LAGRANGE_POLYNOMIAL_THREE_POINT: 'lagrange_three_points_diff',
 };
 export const integrationMethods = {
-    MIDPOINT_RULE: 'midpoint rule',
-    TRAPEZOIDAL_RULE: 'trapezoidal rule',
-    SIMPSON_RULE: 'simpson rule',
+    MIDPOINT_RULE: 'midpoint_rule',
+    TRAPEZOIDAL_RULE: 'trapezoidal_rule',
+    SIMPSON_RULE: 'simpson_rule',
 };
 
 /**

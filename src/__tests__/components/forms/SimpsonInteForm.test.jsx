@@ -1,7 +1,10 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { GraphStateContext } from '../../../context/graphContext';
-import { graphDispatchActions, integrationMethods } from '../../../context/constants';
+import {
+    graphDispatchActions,
+    integrationMethods,
+} from '../../../context/constants';
 import SimpsonForm from '../../../components/calculator/forms/InteSimpsonForm';
 
 // mociking initial state and dispatch

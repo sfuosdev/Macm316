@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import TextInput from '../../common/TextInput';
+import TextInput from '../../common/input/TextInput';
 import NumberOnlyInput from '../../common/input/NumberOnlyInput';
+import Button from '../../common/button/Button';
 import LaTex from '../Latex';
 import { GraphStateContext } from '../../../context/graphContext';
 import {
@@ -14,8 +15,27 @@ const FormWrapper = styled.div`
     flex-direction: column;
 `;
 
+const FormTitle = styled.h3`
+    padding-left: 1em;
+`;
+
+const FormField = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.25em 1em;
+`;
+
+const FieldInputWrapper = styled.div`
+    margin-left: 0.5em;
+`;
+
 function DiffMiddlePointForm() {
     const [state, dispatch] = React.useContext(GraphStateContext);
+    const formState = state.middle_point_diff;
+    const [fn, setFn] = useState(formState.fn);
+    const [lowerBound, setLowerBound] = useState(formState.lowerLimit);
+    const [h, setH] = useState(formState.interval);
 
     if (!state || !dispatch) {
         throw new Error(
@@ -23,52 +43,63 @@ function DiffMiddlePointForm() {
         );
     }
 
-    const handleFnChange = (oldValue, newValue) => {
+    const onSubmit = () => {
         dispatch({
             type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_FN}`,
-            payload: newValue,
+            payload: fn,
         });
+        dispatch({
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
+            payload: Number(lowerBound), // <- parse as number
+        });
+        dispatch({
+            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_INTERVAL}`,
+            payload: Number(h), // <- parse as number
+        });
+    };
+
+    const handleFnChange = (oldValue, newValue) => {
+        setFn(newValue);
     };
 
     const handleLowerLimitChange = (oldValue, newValue) => {
-        /* eslint-disable no-console */
-        console.log(oldValue, newValue);
-        dispatch({
-            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
-            payload: Number(newValue), // <- parse as number
-        });
+        setLowerBound(newValue);
     };
 
     const handleIntervalChange = (oldValue, newValue) => {
-        /* eslint-disable no-console */
-        console.log(oldValue, newValue);
-        dispatch({
-            type: `${differentiationMethods.MIDDLE_POINT}_${graphDispatchActions.UPDATE_INTERVAL}`,
-            payload: Number(newValue), // <- parse as number
-        });
+        setH(newValue);
     };
 
     return (
         <FormWrapper>
-            <div>Middle Point Differentiation</div>
-            <div>
+            <FormTitle>Midpoint Differentiation</FormTitle>
+            <FormField>
                 <LaTex tex="f(x)" />
-                <TextInput fieldName="fn" onChange={handleFnChange} />
-            </div>
-            <div>
-                <LaTex tex="\textup{value of }x_{0}" />
+                <TextInput
+                    fieldName=""
+                    onChange={handleFnChange}
+                    initialValue={formState.fn}
+                />
+            </FormField>
+            <FormField>
+                <LaTex tex="x_{0}" />
                 <NumberOnlyInput
-                    fieldName="lowerLimit"
+                    fieldName=""
                     onChange={handleLowerLimitChange}
+                    initialValue={formState.lowerLimit}
                 />
-            </div>
-            <div>
+            </FormField>
+            <FormField>
                 <LaTex tex="\textup{interval }(h)" />
-                <NumberOnlyInput
-                    fieldName="interval"
-                    onChange={handleIntervalChange}
-                />
-            </div>
+                <FieldInputWrapper>
+                    <NumberOnlyInput
+                        fieldName=""
+                        onChange={handleIntervalChange}
+                        initialValue={formState.interval}
+                    />
+                </FieldInputWrapper>
+            </FormField>
+            <Button title="submit" onClick={onSubmit} />
         </FormWrapper>
     );
 }

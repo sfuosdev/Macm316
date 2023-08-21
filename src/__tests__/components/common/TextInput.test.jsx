@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import TextInput from '../../../components/common/TextInput';
+import TextInput from '../../../components/common/input/TextInput';
 
 describe('TextInputField', () => {
     it('should show error message "Text Input Expected" if wrong input given', () => {

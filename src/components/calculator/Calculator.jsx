@@ -1,6 +1,3 @@
-import React from 'react';
-import functionPlot from 'function-plot';
-
 import useCalculatorState from '../../hooks/useCalculatorState';
 import {
     calculatorModes,
@@ -8,70 +5,46 @@ import {
     differentiationMethods,
 } from '../../context/constants';
 import TrapezoidalGraph from './graphs/TrapezoidalGraph';
-import MidpointDiffGraph from './graphs/MidpointDiffGraph';
+import MiddlePointDiffGraph from './graphs/MiddlePointDiffGraph';
 import CompositeSimpsonGraph from './graphs/CompositeSimpsonGraph';
 
-setTimeout(() => {
-    functionPlot({
-        target: '#graph',
-        width: 1050,
-        height: 740,
-        yAxis: { domain: [-10, 10] },
-        grid: true,
-        data: [
-            {
-                fn: 'log(x)',
-            },
-        ],
-    });
-}, 500);
-
-setTimeout(() => {
-    const graph = document.getElementsByTagName('svg');
-    graph[0].setAttribute('viewBox', '0 0 1050 750');
-}, 1000);
-
-function DifferntiationCalc() {
-    const [state] = useCalculatorState();
-
-    switch (state.method) {
+function DifferntiationGraphComponent(method) {
+    switch (method) {
         case differentiationMethods.MIDDLE_POINT:
-            MidpointDiffGraph('exp(x)', 0, 1);
-            break;
+            return MiddlePointDiffGraph();
         case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
             // Lagrange function call
-            break;
+            return null;
         default:
             return null;
     }
 }
 
-function IntegrationCalc() {
-    const [state] = useCalculatorState();
-
-    switch (state.method) {
+function IntegrationGraphComponent(method) {
+    switch (method) {
         case integrationMethods.MIDPOINT_RULE:
             // midpointGraph
             break;
         case integrationMethods.SIMPSON_RULE:
-            CompositeSimpsonGraph('x^5+2*x^2+3x', -1, 2, 10);
-            break;
+            return CompositeSimpsonGraph();
         case integrationMethods.TRAPEZOIDAL_RULE:
-            TrapezoidalGraph('5*sin(x)', 0, 2, 10);
-            break;
+            return TrapezoidalGraph();
         default:
             return null;
     }
 }
 
-function GraphingCalculator(props) {
+function GraphingCalculator() {
     const [state] = useCalculatorState();
-    if (state.mode === calculatorModes.NUMERICAL_INTEGRATION) {
-        IntegrationCalc(props);
-    } else if (state.mode === calculatorModes.NUMERICAL_DIFFERENTIATION) {
-        DifferntiationCalc(props);
+
+    switch (state.mode) {
+        case calculatorModes.NUMERICAL_INTEGRATION:
+            return IntegrationGraphComponent(state.method);
+        case calculatorModes.NUMERICAL_DIFFERENTIATION:
+            return DifferntiationGraphComponent(state.method);
+        default:
+            return null;
     }
-    return <div id="graph" />;
 }
 
 export default GraphingCalculator;

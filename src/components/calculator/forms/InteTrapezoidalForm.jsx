@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import TextInput from '../../common/TextInput';
+import TextInput from '../../common/input/TextInput';
+import Button from '../../common/button/Button';
 
 const FormWrapper = styled.div`
     display: flex;
@@ -37,9 +38,6 @@ function InteTrapezoidalForm() {
     // const handleFuncChange = (value) => {
     //     setFunc(value);
     // };
-    const Calculate = () => {
-        // const result = null;
-    };
     return (
         <FormWrapper>
             <div>Trapezoidal Integration</div>
@@ -49,9 +47,7 @@ function InteTrapezoidalForm() {
                 <TextInput fieldName="x end point " />
                 <TextInput fieldName="Number of interval " />
             </div>
-            <button type="submit" onClick={Calculate}>
-                Calculate
-            </button>
+            <Button title="submit" onClick={() => console.log('test')} />
         </FormWrapper>
     );
 }

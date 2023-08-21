@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function NumberOnlyInput({ onChange, fieldName }) {
-    const [value, setValue] = useState('');
+function NumberOnlyInput({ onChange, fieldName, initialValue }) {
+    const [value, setValue] = useState(initialValue);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
 
     const handleChange = (e) => {
@@ -48,6 +48,11 @@ function NumberOnlyInput({ onChange, fieldName }) {
 NumberOnlyInput.propTypes = {
     onChange: PropTypes.func.isRequired,
     fieldName: PropTypes.string.isRequired,
+    initialValue: PropTypes.number,
+};
+
+NumberOnlyInput.defaultProps = {
+    initialValue: null,
 };
 
 export default NumberOnlyInput;

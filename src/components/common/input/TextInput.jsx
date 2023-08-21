@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function TextInput({ onChange, fieldName, alphabetOnly = false }) {
-    const [value, setValue] = useState('');
+function TextInput({
+    onChange,
+    fieldName,
+    initialValue,
+    alphabetOnly = false,
+}) {
+    const [value, setValue] = useState(initialValue);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
 
     const handleChange = (e) => {
@@ -46,12 +51,14 @@ function TextInput({ onChange, fieldName, alphabetOnly = false }) {
 TextInput.propTypes = {
     onChange: PropTypes.func,
     fieldName: PropTypes.string,
+    initialValue: PropTypes.string,
     alphabetOnly: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
     onChange: () => null,
     fieldName: '',
+    initialValue: '',
     alphabetOnly: false,
 };
 

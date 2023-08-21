@@ -3,9 +3,9 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions, differentiationMethods } from './constants';
 
 export const initialMiddlePointState = {
-    fn: '',
+    fn: 'sin(x)',
     lowerLimit: 0,
-    interval: 100,
+    interval: 1,
 };
 
 const middlePointStateSchema = Joi.object({

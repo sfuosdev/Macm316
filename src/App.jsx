@@ -5,6 +5,7 @@ import Calculator from './components/calculator/Calculator';
 import { CalculatorContextProvider } from './context/calculatorContext';
 import ThemeProvider from './context/ThemeProvider';
 import GraphLegend from './components/common/GraphLegend';
+import { GraphContextProvider } from './context/graphContext';
 
 const PageContainer = styled.div`
     display: flex;
@@ -32,15 +33,17 @@ function App() {
         <PageContainer>
             <ThemeProvider>
                 <CalculatorContextProvider>
-                    <>
-                        <MenuContainer>
-                            <Menu />
-                        </MenuContainer>
-                        <CalculatorContainer>
-                            <GraphLegend data={graphLegendData} />
-                            <Calculator />
-                        </CalculatorContainer>
-                    </>
+                    <GraphContextProvider>
+                        <>
+                            <MenuContainer>
+                                <Menu />
+                            </MenuContainer>
+                            <CalculatorContainer>
+                                <GraphLegend data={graphLegendData} />
+                                <Calculator />
+                            </CalculatorContainer>
+                        </>
+                    </GraphContextProvider>
                 </CalculatorContextProvider>
             </ThemeProvider>
         </PageContainer>

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import TextInput from '../../common/TextInput';
+import TextInput from '../../common/input/TextInput';
 import NumberOnlyInput from '../../common/input/NumberOnlyInput';
+import Button from '../../common/button/Button';
 import LaTex from '../Latex';
 import { GraphStateContext } from '../../../context/graphContext';
 import { graphDispatchActions } from '../../../context/constants';
@@ -9,6 +10,21 @@ import { graphDispatchActions } from '../../../context/constants';
 const FormWrapper = styled.div`
     display: flex;
     flex-direction: column;
+`;
+
+const FormTitle = styled.h3`
+    padding-left: 1em;
+`;
+
+const FormField = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.25em 1em;
+`;
+
+const FieldInputWrapper = styled.div`
+    margin-left: 0.5em;
 `;
 
 function LagrangeDiffForm() {
@@ -54,25 +70,32 @@ function LagrangeDiffForm() {
 
     return (
         <FormWrapper>
-            <div>Lagrange Polynomial Differentiation</div>
-            <div>
+            <FormTitle>Lagrange interpolating Polynomial</FormTitle>
+            <FormField>
                 <LaTex tex="f(x)" />
-                <TextInput fieldName="fn" onChange={handleFnChange} />
-            </div>
-            <div>
-                <LaTex tex="\textup{value of }x_{0}" />
-                <NumberOnlyInput
-                    fieldName="lowerLimit"
-                    onChange={handleLowerLimitChange}
-                />
-            </div>
-            <div>
+                <FieldInputWrapper>
+                    <TextInput fieldName="" onChange={handleFnChange} />
+                </FieldInputWrapper>
+            </FormField>
+            <FormField>
+                <LaTex tex="x_{0}" />
+                <FieldInputWrapper>
+                    <NumberOnlyInput
+                        fieldName=""
+                        onChange={handleLowerLimitChange}
+                    />
+                </FieldInputWrapper>
+            </FormField>
+            <FormField>
                 <LaTex tex="\textup{interval }(h)" />
-                <NumberOnlyInput
-                    fieldName="interval"
-                    onChange={handleIntervalChange}
-                />
-            </div>
+                <FieldInputWrapper>
+                    <NumberOnlyInput
+                        fieldName=""
+                        onChange={handleIntervalChange}
+                    />
+                </FieldInputWrapper>
+            </FormField>
+            <Button title="submit" onClick={() => console.log('test')} />
         </FormWrapper>
     );
 }

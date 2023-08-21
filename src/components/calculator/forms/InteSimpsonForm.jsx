@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import TextInput from '../../common/TextInput';
+import TextInput from '../../common/input/TextInput';
 import NumberOnlyInput from '../../common/input/NumberOnlyInput';
+import Button from '../../common/button/Button';
 import LaTex from '../Latex';
 import { GraphStateContext } from '../../../context/graphContext';
 import {
@@ -84,6 +85,7 @@ function SimpsonForm() {
                     onChange={handleIntervalChange}
                 />
             </div>
+            <Button title="submit" onClick={() => console.log('test')} />
         </FormWrapper>
     );
 }

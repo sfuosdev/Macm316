@@ -26,7 +26,7 @@ function DifferentiationSelect() {
             <option
                 value={differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT}
             >
-                Lagrange Polynomical Three Point Rule
+                Lagrange Polynomical
             </option>
         </SingleSelect>
     );
@@ -44,9 +44,6 @@ function IntegrationSelect() {
 
     return (
         <SingleSelect onChange={onSelect} value={state.mode}>
-            <option value={integrationMethods.MIDPOINT_RULE}>
-                Midpoint Rule
-            </option>
             <option value={integrationMethods.TRAPEZOIDAL_RULE}>
                 Trapezoidal Rule
             </option>
