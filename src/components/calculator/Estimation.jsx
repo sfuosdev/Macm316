@@ -7,6 +7,7 @@ import {
 import TrapezodialEstimation from './estimations/TrapezoidalEstimation';
 import SimpsonIntegrationEstimation from './estimations/SimpsonEstimation';
 import LagrangeEstimation from './estimations/LagrangeEstimation';
+import MiddlePointEstimation from './estimations/MiddlePointEstimation';
 
 function MethodSwitch() {
     const [state] = useCalculatorState();
@@ -14,7 +15,7 @@ function MethodSwitch() {
     function forMethod() {
         switch (state.method) {
             case differentiationMethods.MIDDLE_POINT:
-                return <>Estimation</>;
+                return MiddlePointEstimation('sin(x)', Math.PI, 0.1);
             case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
                 return LagrangeEstimation('sin(x)', 0, 1, Math.PI);
             case integrationMethods.TRAPEZOIDAL_RULE:
