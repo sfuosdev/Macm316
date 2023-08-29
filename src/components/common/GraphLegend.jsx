@@ -6,9 +6,11 @@ function GraphLegend({ data }) {
         <div
             style={{
                 position: 'absolute',
-                border: '1px solid #ccc',
+                border: '2px solid black',
                 padding: '10px',
                 display: 'inline-block',
+                marginLeft: '15px',
+                borderRadius: '5px',
                 zIndex: 1,
                 backgroundColor: 'white',
             }}
@@ -16,18 +18,23 @@ function GraphLegend({ data }) {
             {data.map((item) => (
                 <div
                     key={item.title}
-                    style={{ display: 'flex', alignItems: 'center' }}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginBottom: '5px',
+                    }}
                     data-testid="legend-item"
                 >
                     <div
                         style={{
                             width: '50px',
-                            height: '3px',
-                            backgroundColor: item.color,
+                            borderWidth: '3px',
+                            borderStyle: item.style ?? 'solid',
+                            borderColor: item.color,
                             marginRight: '5px',
                         }}
                     />
-                    <span>{item.title}</span>
+                    <span style={{ fontSize: '200%' }}>{item.title}</span>
                 </div>
             ))}
         </div>
@@ -39,6 +46,7 @@ GraphLegend.propTypes = {
         PropTypes.shape({
             color: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
+            style: PropTypes.string,
         }),
     ).isRequired,
 };

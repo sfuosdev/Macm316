@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 const SelectComponent = styled.select`
     margin: 10px;
+    width: 400px;
+    height: 50px;
 `;
 
 function SingleSelect({ children, onChange }) {

@@ -15,8 +15,7 @@ const MenuHeaderWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border-bottom-width: thick;
-    border-bottom-style: dotted;
+    border-bottom: 1px solid black;
 `;
 
 function Menu() {

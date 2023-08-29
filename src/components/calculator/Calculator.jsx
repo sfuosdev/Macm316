@@ -19,10 +19,10 @@ function DifferntiationGraphComponent(method) {
                     <GraphLegend
                         data={[
                             { color: 'blue', title: 'f(x)' },
-                            { color: 'green', title: 'derivative of f(x)' },
+                            { color: 'green', title: 'Derivative of f(x)' },
                             {
                                 color: 'red',
-                                title: 'approximation to the derivative of f(x)',
+                                title: 'Approximation to the derivative of f(x)',
                             },
                         ]}
                     />
@@ -35,10 +35,15 @@ function DifferntiationGraphComponent(method) {
                     <GraphLegend
                         data={[
                             { color: 'blue', title: 'f(x)' },
-                            { color: 'green', title: 'derivative of f(x)' },
+                            { color: 'green', title: 'Derivative of f(x)' },
                             {
                                 color: 'red',
-                                title: 'approximation to the derivative of f(x)',
+                                title: 'Lagrange Polynomial P(x)',
+                                style: 'dotted',
+                            },
+                            {
+                                color: 'red',
+                                title: 'Approximation to the derivative of f(x)',
                             },
                         ]}
                     />
@@ -58,10 +63,9 @@ function IntegrationGraphComponent(method) {
                     <GraphLegend
                         data={[
                             { color: 'blue', title: 'f(x)' },
-                            { color: 'green', title: 'derivative of f(x)' },
                             {
-                                color: 'red',
-                                title: 'approximation to the derivative of f(x)',
+                                color: 'purple',
+                                title: 'Quadratic Polynomials Pi(x)',
                             },
                         ]}
                     />
@@ -74,11 +78,7 @@ function IntegrationGraphComponent(method) {
                     <GraphLegend
                         data={[
                             { color: 'blue', title: 'f(x)' },
-                            { color: 'green', title: 'derivative of f(x)' },
-                            {
-                                color: 'red',
-                                title: 'approximation to the derivative of f(x)',
-                            },
+                            { color: 'purple', title: 'Trapezoids' },
                         ]}
                     />
                     <TrapezoidalGraph />
