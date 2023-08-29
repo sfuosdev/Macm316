@@ -14,7 +14,7 @@ const PageContainer = styled.div`
 `;
 
 const MenuContainer = styled.div`
-    width: 350px;
+    width: 550px;
     border-right-width: thick;
     border-right-style: dotted;
 `;

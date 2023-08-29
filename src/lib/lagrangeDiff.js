@@ -13,6 +13,29 @@ function lagrangePolynomial(f, xStart, h) {
     const xMid = xStart + h;
     const xEnd = xStart + 2 * h;
 
+    const l0 = `((x-${xMid})*(x-${xEnd})) / ((${xStart}-${xMid})*(${xStart}-${xEnd}))`;
+    const l1 = `((x-${xStart})*(x-${xEnd})) / ((${xMid}-${xStart})*(${xMid}-${xEnd}))`;
+    const l2 = `((x-${xStart})*(x-${xMid})) / ((${xEnd}-${xStart})*(${xEnd}-${xMid}))`;
+
+    const yStart = math.format(parser.evaluate(`f(${xStart})`), {
+        precision: 6,
+    });
+    const yMid = math.format(parser.evaluate(`f(${xMid})`), { precision: 6 });
+    const yEnd = math.format(parser.evaluate(`f(${xEnd})`), { precision: 6 });
+
+    const polynomial = `${yStart}*${l0} + ${yMid}*${l1} + ${yEnd}*${l2}`;
+
+    return polynomial;
+}
+
+function lagrangePolynomialDeriv(f, xStart, h) {
+    if (f === '') return '';
+
+    parser.evaluate(`f(x) = ${f}`);
+
+    const xMid = xStart + h;
+    const xEnd = xStart + 2 * h;
+
     const yStart = math.format(parser.evaluate(`f(${xStart})`), {
         precision: 6,
     });
@@ -31,11 +54,11 @@ function lagrangePolynomial(f, xStart, h) {
 function lagrangeDiff(f, xStart, h, xTarget) {
     if (f === '') return '';
 
-    const lagrangeExpr = lagrangePolynomial(f, xStart, h);
+    const lagrangeExpr = lagrangePolynomialDeriv(f, xStart, h);
     const node = parse(lagrangeExpr);
     const derivateive = node.compile();
 
     return derivateive.evaluate({ x: xTarget });
 }
 
-export { lagrangePolynomial, lagrangeDiff };
+export { lagrangePolynomial, lagrangePolynomialDeriv, lagrangeDiff };

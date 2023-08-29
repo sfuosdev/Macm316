@@ -6,24 +6,23 @@ import { lagrangePolynomial, lagrangeDiff } from '../../../lib/lagrangeDiff';
 
 function LagrangeGraph() {
     const [state] = useGraphState();
-    const graphState = state.lagrange_polynomial_three_point;
+    const graphState = state.lagrange_three_points_diff;
 
-    function EvaluateLagrange(f, xStart, h, x) {
+    function lagrangeGraph(func, xStart, h, xTarget) {
         const math = create(all, {});
+
+        const polyFunc = lagrangePolynomial(func, xStart, h);
+        const m = lagrangeDiff(func, xStart, h, xTarget);
         const parser = math.parser();
+        parser.evaluate(`f(x) = ${func}`);
+        const yFunc = parser.evaluate(`f(${xTarget})`);
 
-        const lagrangeExpr = lagrangePolynomial(f, xStart, h);
-        parser.evaluate(`L(x) = ${lagrangeExpr}`);
+        const dFunc = yFunc - m * xTarget;
 
-        return parser.evaluate(`L(${x})`);
-    }
+        const estimOnFunc = String(m).concat('x+', String(dFunc));
 
-    function lagrangeGraph(func, xStart, h) {
-        const xTarget = xStart + h;
-        const m = lagrangeDiff(func, xStart, h);
-        const yTarget = EvaluateLagrange(func, xStart, h, xTarget);
-        const b = yTarget - m * xTarget;
-        const lagrangeDeriv = String(m).concat('x+', String(b));
+        const df = math.derivative(func, 'x').evaluate({ x: xTarget });
+        const actualDeriv = `${df} * (x-${xTarget}) + ${yFunc}`;
 
         const options = {
             target: '#graph',
@@ -31,13 +30,38 @@ function LagrangeGraph() {
             height: 740,
             xAxis: { domain: [-10, 10] },
             yAxis: { domain: [-10, 30] },
-            grid: true,
             data: [
                 {
                     fn: func,
+                    color: 'blue',
                 },
                 {
-                    fn: lagrangeDeriv,
+                    fn: polyFunc,
+                    graphType: 'scatter',
+                    nSamples: 500,
+                    color: 'red',
+                },
+                {
+                    fn: estimOnFunc,
+                    color: 'red',
+                },
+                {
+                    fn: actualDeriv,
+                    color: 'green',
+                },
+            ],
+            annotations: [
+                {
+                    x: xStart,
+                    text: 'x0',
+                },
+                {
+                    x: xStart + h,
+                    text: 'x1',
+                },
+                {
+                    x: xStart + 2 * h,
+                    text: 'x2',
                 },
             ],
         };
@@ -46,9 +70,19 @@ function LagrangeGraph() {
     }
 
     useEffect(() => {
-        lagrangeGraph(graphState.func, graphState.xStart, graphState.h);
+        lagrangeGraph(
+            graphState.fn,
+            graphState.lowerLimit,
+            graphState.interval,
+            graphState.xTarget,
+        );
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [graphState.func, graphState.xStart, graphState.h]);
+    }, [
+        graphState.fn,
+        graphState.lowerLimit,
+        graphState.interval,
+        graphState.xTarget,
+    ]);
 
     return <div id="graph" />;
 }

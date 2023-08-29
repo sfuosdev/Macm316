@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TextInput from '../../common/input/TextInput';
 import NumberOnlyInput from '../../common/input/NumberOnlyInput';
@@ -19,8 +19,9 @@ const FormTitle = styled.h3`
 const FormField = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     padding: 0.25em 1em;
+    justify-content: space-between;
+    width: 400px;
 `;
 
 const FieldInputWrapper = styled.div`
@@ -28,8 +29,13 @@ const FieldInputWrapper = styled.div`
 `;
 
 function LagrangeDiffForm() {
-    // context validation
     const [state, dispatch] = React.useContext(GraphStateContext);
+    const formState = state.lagrange_three_points_diff;
+    const dispatchMethod = 'lagrange_three_points_diff';
+    const [fn, setFn] = useState(formState.fn);
+    const [lowerBound, setLowerBound] = useState(formState.lowerLimit);
+    const [xTarget, setTargetX] = useState(formState.xTarget);
+    const [h, setH] = useState(formState.interval);
 
     if (!state || !dispatch) {
         throw new Error(
@@ -37,35 +43,40 @@ function LagrangeDiffForm() {
         );
     }
 
+    const onSubmit = () => {
+        dispatch({
+            type: `${dispatchMethod}_${graphDispatchActions.UPDATE_FN}`,
+            payload: fn,
+        });
+        dispatch({
+            type: `${dispatchMethod}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
+            payload: Number(lowerBound),
+        });
+        dispatch({
+            type: `${dispatchMethod}_${graphDispatchActions.UPDATE_TARGET_X}`,
+            payload: Number(xTarget),
+        });
+        dispatch({
+            type: `${dispatchMethod}_${graphDispatchActions.UPDATE_INTERVAL}`,
+            payload: Number(h),
+        });
+    };
+
     // handle the change of the input fields by passing to onChange
     const handleFnChange = (oldValue, newValue) => {
-        /* eslint-disable no-console */
-        console.log(oldValue, newValue);
-        state.method = 'lagrange polynomial three point rule';
-        dispatch({
-            type: graphDispatchActions.UPDATE_FN,
-            payload: newValue,
-        });
+        setFn(newValue);
     };
 
     const handleLowerLimitChange = (oldValue, newValue) => {
-        /* eslint-disable no-console */
-        console.log(oldValue, newValue);
-        state.method = 'lagrange polynomial three point rule';
-        dispatch({
-            type: graphDispatchActions.UPDATE_LOWER_LIMIT,
-            payload: newValue,
-        });
+        setLowerBound(newValue);
+    };
+
+    const handleTargetXChange = (oldValue, newValue) => {
+        setTargetX(newValue);
     };
 
     const handleIntervalChange = (oldValue, newValue) => {
-        /* eslint-disable no-console */
-        console.log(oldValue, newValue);
-        state.method = 'lagrange polynomial three point rule';
-        dispatch({
-            type: graphDispatchActions.UPDATE_INTERVAL,
-            payload: newValue,
-        });
+        setH(newValue);
     };
 
     return (
@@ -74,7 +85,11 @@ function LagrangeDiffForm() {
             <FormField>
                 <LaTex tex="f(x)" />
                 <FieldInputWrapper>
-                    <TextInput fieldName="" onChange={handleFnChange} />
+                    <TextInput
+                        fieldName=""
+                        onChange={handleFnChange}
+                        initialValue={formState.fn}
+                    />
                 </FieldInputWrapper>
             </FormField>
             <FormField>
@@ -83,6 +98,17 @@ function LagrangeDiffForm() {
                     <NumberOnlyInput
                         fieldName=""
                         onChange={handleLowerLimitChange}
+                        initialValue={formState.lowerLimit}
+                    />
+                </FieldInputWrapper>
+            </FormField>
+            <FormField>
+                <LaTex tex="x_j" />
+                <FieldInputWrapper>
+                    <NumberOnlyInput
+                        fieldName=""
+                        onChange={handleTargetXChange}
+                        initialValue={formState.xTarget}
                     />
                 </FieldInputWrapper>
             </FormField>
@@ -92,10 +118,11 @@ function LagrangeDiffForm() {
                     <NumberOnlyInput
                         fieldName=""
                         onChange={handleIntervalChange}
+                        initialValue={formState.interval}
                     />
                 </FieldInputWrapper>
             </FormField>
-            <Button title="submit" onClick={() => console.log('test')} />
+            <Button title="Apply" onClick={onSubmit} />
         </FormWrapper>
     );
 }

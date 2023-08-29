@@ -22,8 +22,9 @@ const FormTitle = styled.h3`
 const FormField = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     padding: 0.25em 1em;
+    justify-content: space-between;
+    width: 400px;
 `;
 
 const FieldInputWrapper = styled.div`
@@ -75,19 +76,23 @@ function DiffMiddlePointForm() {
             <FormTitle>Midpoint Differentiation</FormTitle>
             <FormField>
                 <LaTex tex="f(x)" />
-                <TextInput
-                    fieldName=""
-                    onChange={handleFnChange}
-                    initialValue={formState.fn}
-                />
+                <FieldInputWrapper>
+                    <TextInput
+                        fieldName=""
+                        onChange={handleFnChange}
+                        initialValue={formState.fn}
+                    />
+                </FieldInputWrapper>
             </FormField>
             <FormField>
-                <LaTex tex="x_{0}" />
-                <NumberOnlyInput
-                    fieldName=""
-                    onChange={handleLowerLimitChange}
-                    initialValue={formState.lowerLimit}
-                />
+                <LaTex tex="x_j" />
+                <FieldInputWrapper>
+                    <NumberOnlyInput
+                        fieldName=""
+                        onChange={handleLowerLimitChange}
+                        initialValue={formState.lowerLimit}
+                    />
+                </FieldInputWrapper>
             </FormField>
             <FormField>
                 <LaTex tex="\textup{interval }(h)" />
@@ -99,7 +104,7 @@ function DiffMiddlePointForm() {
                     />
                 </FieldInputWrapper>
             </FormField>
-            <Button title="submit" onClick={onSubmit} />
+            <Button title="Apply" onClick={onSubmit} />
         </FormWrapper>
     );
 }

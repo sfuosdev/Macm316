@@ -43,7 +43,7 @@ function Footer() {
                     style={linkStyle}
                 >
                     <img src={sec} style={imgStyle} alt="team_logo" />
-                    SFU Software Engineering Club
+                    SFU SwSo
                 </a>
             </p>
             <p style={pStyle}>

@@ -1,35 +1,45 @@
 import React from 'react';
 import numericalDiff from '../../../lib/midpoint';
 import LaTex from '../Latex';
+import useGraphState from '../../../hooks/useGraphState';
 
-function LatexStringMiddePoint(func, Estimation, latexString) {
+function MiddlePointEstimation() {
+    const [state] = useGraphState();
+    const estimationState = state.middle_point_diff;
+
+    const estimation = numericalDiff(
+        estimationState.fn,
+        estimationState.lowerLimit,
+        estimationState.interval,
+    ).toFixed(6);
+
+    const x0 = (
+        estimationState.lowerLimit -
+        estimationState.interval / 2
+    ).toFixed(0);
+    const xn = (
+        estimationState.lowerLimit +
+        estimationState.interval / 2
+    ).toFixed(0);
+    const fixedH = 2 * estimationState.interval.toFixed(1);
+
+    const latexString = `f'(x_j) \\approx \\frac{f(${xn}) - f(${x0})}{${fixedH}})`;
+
     return (
         <div className="Estimation">
             <p>Formula</p>
-            <LaTex tex={func} />
+            <LaTex tex={estimationState.fn} />
             <br />
             <p>Estimation</p>
-            <LaTex tex={Estimation} />
+            <LaTex tex={`f'(x_j) \\approx ${estimation}`} />
             <br />
-            <p>Quadrature Function</p>
-            <LaTex tex="\tiny f'(x_0) \approx \frac{f(x + h) - f(x - h)}{2h}" />
+            <p>Differentiation Function</p>
+            <LaTex tex="f'(x_j) \approx \frac{f(x + h) - f(x - h)}{2h}" />
             <br />
             <p>Actual Estimation</p>
             <LaTex tex={latexString} />
         </div>
     );
-}
-
-function MiddlePointEstimation(func, xStart, h) {
-    const estimation = numericalDiff(func, xStart, h).toFixed(6);
-
-    const x0 = (xStart - h / 2).toFixed(0);
-    const xn = (xStart + h / 2).toFixed(0);
-    const fixedH = 2 * h.toFixed(1);
-
-    const latexString = `\\scriptsize f'(x) \\approx \\frac{f(${xn}) - f(${x0})}{${fixedH}})`;
-
-    return LatexStringMiddePoint(func, estimation, latexString);
 }
 
 export default MiddlePointEstimation;

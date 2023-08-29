@@ -1,5 +1,3 @@
-// trapezoidal rule
-// trapezoidal(func, xStart, xEnd, n)
 import { create, all } from 'mathjs';
 
 function trapezoidal(func, xStart, xEnd, n) {

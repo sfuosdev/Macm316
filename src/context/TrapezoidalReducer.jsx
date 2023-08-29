@@ -3,10 +3,10 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions, integrationMethods } from './constants';
 
 export const initialTrapezoidalState = {
-    fn: '',
+    fn: '5*sin(x/2)',
     lowerLimit: 0,
-    upperLimit: 1,
-    interval: 1,
+    upperLimit: 2 * Math.PI,
+    interval: 5,
 };
 
 const trapezoidalStateSchema = Joi.object({

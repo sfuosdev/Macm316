@@ -26,6 +26,7 @@ export const integrationMethods = {
 export const graphDispatchActions = {
     UPDATE_FN: 'update_fn',
     UPDATE_LOWER_LIMIT: 'update_lower_limit',
+    UPDATE_TARGET_X: 'update_target_x',
     UPDATE_UPPER_LIMIT: 'update_upper_limit',
     UPDATE_NUMBER_OF_INTERVAL: 'update_number_of_interval',
     UPDATE_METHOD: 'update_method',

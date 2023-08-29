@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { create, all } from 'mathjs';
 import functionPlot from 'function-plot';
-// import useGraphState from '../../../hooks/useGraphState';
+import useGraphState from '../../../hooks/useGraphState';
 
 function TrapezoidalGraph() {
-    // const [state] = useGraphState();
-    // const graphState = state.trapezoidal_rule;
+    const [state] = useGraphState();
+    const graphState = state.trapezoidal_rule;
 
     function trapezoidalGraph(funcString, xStart, xEnd, n) {
         const delta = (xEnd - xStart) / n;
@@ -19,7 +19,6 @@ function TrapezoidalGraph() {
             width: 1050,
             height: 740,
             xAxis: { domain: [-10, 10] },
-            grid: true,
             data: [
                 {
                     fn: funcString,
@@ -31,7 +30,7 @@ function TrapezoidalGraph() {
         let b;
         let func;
         // create y = mx + b linear graph for each interval
-        for (let i = xStart; i < xEnd - delta; i += delta) {
+        for (let i = xStart; i <= xEnd - delta; i += delta) {
             m = f.evaluate({ x: i + delta }) - f.evaluate({ x: i });
             m /= delta;
             b = f.evaluate({ x: i }) - m * i;
@@ -41,6 +40,7 @@ function TrapezoidalGraph() {
                 range: [i, i + delta],
                 skipTip: true,
                 closed: true,
+                color: 'purple',
             });
         }
 
@@ -48,8 +48,18 @@ function TrapezoidalGraph() {
     }
 
     useEffect(() => {
-        trapezoidalGraph('5*sin(x)', 0, 2, 10);
-    }, []);
+        trapezoidalGraph(
+            graphState.fn,
+            graphState.lowerLimit,
+            graphState.upperLimit,
+            graphState.interval,
+        );
+    }, [
+        graphState.fn,
+        graphState.lowerLimit,
+        graphState.upperLimit,
+        graphState.interval,
+    ]);
 
     return <div id="graph" />;
 }

@@ -3,9 +3,10 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions, differentiationMethods } from './constants';
 
 export const initialLagrangeState = {
-    fn: '',
-    lowerLimit: 0,
-    interval: 1,
+    fn: '2*x^3 - 4*x + 5',
+    lowerLimit: -2,
+    interval: 1.5,
+    xTarget: -1,
     method: differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT,
 };
 
@@ -13,6 +14,7 @@ const lagrangeStateSchema = Joi.object({
     fn: Joi.string().allow('').required(),
     lowerLimit: Joi.number().required(),
     interval: Joi.number().required(),
+    xTarget: Joi.number().required(),
     method: Joi.string().required(),
 });
 
@@ -27,6 +29,9 @@ function lagrangeReducer(state = initialLagrangeState, action) {
             break;
         case `${differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`:
             newState = { ...state, lowerLimit: action.payload };
+            break;
+        case `${differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT}_${graphDispatchActions.UPDATE_TARGET_X}`:
+            newState = { ...state, xTarget: action.payload };
             break;
         case `${differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT}_${graphDispatchActions.UPDATE_INTERVAL}`:
             newState = { ...state, interval: action.payload };

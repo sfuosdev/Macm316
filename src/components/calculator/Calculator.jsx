@@ -1,3 +1,4 @@
+import React from 'react';
 import useCalculatorState from '../../hooks/useCalculatorState';
 import {
     calculatorModes,
@@ -7,14 +8,14 @@ import {
 import TrapezoidalGraph from './graphs/TrapezoidalGraph';
 import MiddlePointDiffGraph from './graphs/MiddlePointDiffGraph';
 import CompositeSimpsonGraph from './graphs/CompositeSimpsonGraph';
+import LagrangeGraph from './graphs/LagrangeGraph';
 
 function DifferntiationGraphComponent(method) {
     switch (method) {
         case differentiationMethods.MIDDLE_POINT:
-            return MiddlePointDiffGraph();
+            return <MiddlePointDiffGraph />;
         case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
-            // Lagrange function call
-            return null;
+            return <LagrangeGraph />;
         default:
             return null;
     }
@@ -22,13 +23,10 @@ function DifferntiationGraphComponent(method) {
 
 function IntegrationGraphComponent(method) {
     switch (method) {
-        case integrationMethods.MIDPOINT_RULE:
-            // midpointGraph
-            break;
         case integrationMethods.SIMPSON_RULE:
-            return CompositeSimpsonGraph();
+            return <CompositeSimpsonGraph />;
         case integrationMethods.TRAPEZOIDAL_RULE:
-            return TrapezoidalGraph();
+            return <TrapezoidalGraph />;
         default:
             return null;
     }
