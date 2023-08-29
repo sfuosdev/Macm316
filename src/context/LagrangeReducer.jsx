@@ -3,7 +3,7 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions, differentiationMethods } from './constants';
 
 export const initialLagrangeState = {
-    fn: '2*x^3 - 4*x + 5',
+    fn: 'x^3 - 2*x + 2',
     lowerLimit: -2,
     interval: 1.5,
     xTarget: -1,

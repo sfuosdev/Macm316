@@ -28,8 +28,11 @@ function LagrangeGraph() {
             target: '#graph',
             width: 1050,
             height: 740,
-            xAxis: { domain: [-10, 10] },
-            yAxis: { domain: [-10, 30] },
+            xAxis: {
+                domain: [xStart - 10, xStart + h * 3 + 10],
+                label: 'x-axis',
+            },
+            yAxis: { label: 'y-axis' },
             data: [
                 {
                     fn: func,

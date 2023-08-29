@@ -10,7 +10,7 @@ export const initialMiddlePointState = {
 
 const middlePointStateSchema = Joi.object({
     lowerLimit: Joi.number().required(),
-    interval: Joi.number().integer().positive().required(),
+    interval: Joi.number().positive().required(),
     fn: Joi.string().allow('').required(),
 });
 

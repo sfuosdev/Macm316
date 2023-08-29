@@ -18,7 +18,11 @@ function TrapezoidalGraph() {
             target: '#graph',
             width: 1050,
             height: 740,
-            xAxis: { domain: [-10, 10] },
+            xAxis: {
+                domain: [xStart - 10, xEnd + 10],
+                label: 'x-axis',
+            },
+            yAxis: { label: 'y-axis' },
             data: [
                 {
                     fn: funcString,

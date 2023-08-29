@@ -3,10 +3,10 @@ import { ValidationError } from '../errors';
 import { graphDispatchActions, integrationMethods } from './constants';
 
 export const initialSimpsonState = {
-    fn: '',
-    upperLimit: 1,
-    lowerLimit: 0,
-    interval: 1,
+    fn: 'x^3 - 2*x + 2',
+    lowerLimit: -1.5,
+    upperLimit: 2,
+    interval: 4,
 };
 
 const simpsonStateSchema = Joi.object({

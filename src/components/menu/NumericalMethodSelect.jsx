@@ -48,7 +48,7 @@ function IntegrationSelect() {
                 Trapezoidal Rule
             </option>
             <option value={integrationMethods.SIMPSON_RULE}>
-                Simpson&quot;s 3/8 Rule
+                Simpson&quot;s 1/3 Rule
             </option>
         </SingleSelect>
     );

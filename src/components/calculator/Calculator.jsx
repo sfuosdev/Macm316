@@ -9,13 +9,42 @@ import TrapezoidalGraph from './graphs/TrapezoidalGraph';
 import MiddlePointDiffGraph from './graphs/MiddlePointDiffGraph';
 import CompositeSimpsonGraph from './graphs/CompositeSimpsonGraph';
 import LagrangeGraph from './graphs/LagrangeGraph';
+import GraphLegend from '../common/GraphLegend';
 
 function DifferntiationGraphComponent(method) {
     switch (method) {
         case differentiationMethods.MIDDLE_POINT:
-            return <MiddlePointDiffGraph />;
+            return (
+                <div>
+                    <GraphLegend
+                        data={[
+                            { color: 'blue', title: 'f(x)' },
+                            { color: 'green', title: 'derivative of f(x)' },
+                            {
+                                color: 'red',
+                                title: 'approximation to the derivative of f(x)',
+                            },
+                        ]}
+                    />
+                    <MiddlePointDiffGraph />
+                </div>
+            );
         case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
-            return <LagrangeGraph />;
+            return (
+                <div>
+                    <GraphLegend
+                        data={[
+                            { color: 'blue', title: 'f(x)' },
+                            { color: 'green', title: 'derivative of f(x)' },
+                            {
+                                color: 'red',
+                                title: 'approximation to the derivative of f(x)',
+                            },
+                        ]}
+                    />
+                    <LagrangeGraph />
+                </div>
+            );
         default:
             return null;
     }
@@ -24,9 +53,37 @@ function DifferntiationGraphComponent(method) {
 function IntegrationGraphComponent(method) {
     switch (method) {
         case integrationMethods.SIMPSON_RULE:
-            return <CompositeSimpsonGraph />;
+            return (
+                <div>
+                    <GraphLegend
+                        data={[
+                            { color: 'blue', title: 'f(x)' },
+                            { color: 'green', title: 'derivative of f(x)' },
+                            {
+                                color: 'red',
+                                title: 'approximation to the derivative of f(x)',
+                            },
+                        ]}
+                    />
+                    <CompositeSimpsonGraph />
+                </div>
+            );
         case integrationMethods.TRAPEZOIDAL_RULE:
-            return <TrapezoidalGraph />;
+            return (
+                <div>
+                    <GraphLegend
+                        data={[
+                            { color: 'blue', title: 'f(x)' },
+                            { color: 'green', title: 'derivative of f(x)' },
+                            {
+                                color: 'red',
+                                title: 'approximation to the derivative of f(x)',
+                            },
+                        ]}
+                    />
+                    <TrapezoidalGraph />
+                </div>
+            );
         default:
             return null;
     }

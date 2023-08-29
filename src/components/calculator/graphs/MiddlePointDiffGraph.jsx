@@ -16,14 +16,15 @@ function MiddlePointDiffGraph() {
             x: x + h,
         })})`;
 
-        const xDomainSize = 10;
+        const actualM = math.derivative(f, 'x').evaluate({ x });
+        const actualDeriv = `${actualM}(x-${x})+(${math.evaluate(f, { x })})`;
 
         const options = {
             target: '#graph',
             width: 1050,
             height: 740,
             xAxis: {
-                domain: [x - xDomainSize, x + xDomainSize],
+                domain: [x - 10, x + 10],
                 label: 'x-axis',
             },
             yAxis: { label: 'y-axis' },
@@ -34,6 +35,11 @@ function MiddlePointDiffGraph() {
                 },
                 {
                     fn: midpointDeriv,
+                    color: 'red',
+                },
+                {
+                    fn: actualDeriv,
+                    color: 'green',
                 },
             ],
             annotations: [
@@ -42,17 +48,8 @@ function MiddlePointDiffGraph() {
                     text: 'x-h',
                 },
                 {
-                    x,
-                },
-                {
                     x: x + h,
                     text: 'x+h',
-                },
-                {
-                    y: math.evaluate(f, { x: x - h }),
-                },
-                {
-                    y: math.evaluate(f, { x: x + h }),
                 },
             ],
         };

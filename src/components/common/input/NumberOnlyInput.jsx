@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+function isNumeric(str) {
+    if (typeof str !== 'string') return false;
+    return !Number.isNaN(str) && !Number.isNaN(parseFloat(str));
+}
+
 function NumberOnlyInput({ onChange, fieldName, initialValue }) {
     const [value, setValue] = useState(initialValue);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
 
     const handleChange = (e) => {
         const newValue = e.target.value;
+        if (newValue !== '' && newValue !== '-' && !isNumeric(newValue)) {
+            setShowErrorMessage(true);
+            return;
+        }
         const oldValue = value;
 
         onChange(oldValue, newValue);
@@ -15,10 +24,13 @@ function NumberOnlyInput({ onChange, fieldName, initialValue }) {
 
     const handleKeyPress = (e) => {
         const charCode = e.which || e.keyCode;
-
         // allow digits, single dot and backspace
         if (
-            !((charCode >= 48 && charCode <= 57) || charCode === 190) &&
+            !(
+                (charCode >= 48 && charCode <= 57) ||
+                charCode === 190 ||
+                charCode === 189
+            ) &&
             charCode !== 8
         ) {
             e.preventDefault();

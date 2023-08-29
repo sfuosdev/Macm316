@@ -4,7 +4,6 @@ import Menu from './components/menu/Menu';
 import Calculator from './components/calculator/Calculator';
 import { CalculatorContextProvider } from './context/calculatorContext';
 import ThemeProvider from './context/ThemeProvider';
-import GraphLegend from './components/common/GraphLegend';
 import { GraphContextProvider } from './context/graphContext';
 
 const PageContainer = styled.div`
@@ -22,11 +21,6 @@ const MenuContainer = styled.div`
 const CalculatorContainer = styled.div`
     flex: 1;
 `;
-const graphLegendData = [
-    { color: 'red', title: 'Red' },
-    { color: 'green', title: 'Green' },
-    { color: 'blue', title: 'Blue' },
-];
 
 function App() {
     return (
@@ -39,7 +33,6 @@ function App() {
                                 <Menu />
                             </MenuContainer>
                             <CalculatorContainer>
-                                <GraphLegend data={graphLegendData} />
                                 <Calculator />
                             </CalculatorContainer>
                         </>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TextInput from '../../common/input/TextInput';
 import NumberOnlyInput from '../../common/input/NumberOnlyInput';
@@ -15,8 +15,29 @@ const FormWrapper = styled.div`
     flex-direction: column;
 `;
 
+const FormTitle = styled.h3`
+    padding-left: 1em;
+`;
+
+const FormField = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding: 0.25em 1em;
+    justify-content: space-between;
+    width: 400px;
+`;
+
+const FieldInputWrapper = styled.div`
+    margin-left: 0.5em;
+`;
+
 function SimpsonForm() {
     const [state, dispatch] = React.useContext(GraphStateContext);
+    const formState = state.simpson_rule;
+    const [fn, setFn] = useState(formState.fn);
+    const [numOfIntervals, setNumOfInterval] = useState(formState.interval);
+    const [xStart, setXStart] = useState(formState.lowerLimit);
+    const [xEnd, setXEnd] = useState(formState.upperLimit);
 
     if (!state || !dispatch) {
         throw new Error(
@@ -24,68 +45,69 @@ function SimpsonForm() {
         );
     }
 
-    const handleFnChange = (oldValue, newValue) => {
-        /* eslint-disable no-console */
-        console.log(oldValue, newValue);
+    const onSubmit = () => {
         dispatch({
             type: `${integrationMethods.SIMPSON_RULE}_${graphDispatchActions.UPDATE_FN}`,
-            payload: newValue,
+            payload: fn,
         });
-    };
-
-    const handleLowerLimitChange = (oldValue, newValue) => {
-        /* eslint-disable no-console */
-        console.log(oldValue, newValue);
         dispatch({
             type: `${integrationMethods.SIMPSON_RULE}_${graphDispatchActions.UPDATE_LOWER_LIMIT}`,
-            payload: Number(newValue), // <- parse as number
+            payload: Number(xStart), // <- parse as number
         });
-    };
-
-    const handleUpperLimitChange = (oldValue, newValue) => {
-        /* eslint-disable no-console */
-        console.log(oldValue, newValue);
         dispatch({
             type: `${integrationMethods.SIMPSON_RULE}_${graphDispatchActions.UPDATE_UPPER_LIMIT}`,
-            payload: Number(newValue), // <- parse as number
+            payload: Number(xEnd), // <- parse as number
         });
-    };
-
-    const handleIntervalChange = (oldValue, newValue) => {
-        /* eslint-disable no-console */
-        console.log(oldValue, newValue);
         dispatch({
-            type: `${integrationMethods.SIMPSON_RULE}_${graphDispatchActions.UPDATE_NUMBER_OF_INTERVAL}`,
-            payload: Number(newValue), // <- parse as number
+            type: `${integrationMethods.SIMPSON_RULE}_${graphDispatchActions.UPDATE_INTERVAL}`,
+            payload: Number(numOfIntervals), // <- parse as number
         });
     };
 
     return (
         <FormWrapper>
-            <div>Simpsons Rule Integration</div>
-            <div>
+            <FormTitle>Integration by Composite Simpsons 1/3 Rule</FormTitle>
+            <FormField>
                 <LaTex tex="f(x)" />
-                <TextInput fieldName="fn" onChange={handleFnChange} />
-            </div>
-            <div>
-                <NumberOnlyInput
-                    fieldName="lowerLimit"
-                    onChange={handleLowerLimitChange}
-                />
-            </div>
-            <div>
-                <NumberOnlyInput
-                    fieldName="upperLimit"
-                    onChange={handleUpperLimitChange}
-                />
-            </div>
-            <div>
-                <NumberOnlyInput
-                    fieldName="Number of intervals"
-                    onChange={handleIntervalChange}
-                />
-            </div>
-            <Button title="submit" onClick={() => console.log('test')} />
+                <FieldInputWrapper>
+                    <TextInput
+                        fieldName=""
+                        onChange={(oldVal, newVal) => setFn(newVal)}
+                        initialValue={fn}
+                    />
+                </FieldInputWrapper>
+            </FormField>
+            <FormField>
+                <LaTex tex="x_{0}" />
+                <FieldInputWrapper>
+                    <NumberOnlyInput
+                        fieldName=""
+                        onChange={(oldVal, newVal) => setXStart(newVal)}
+                        initialValue={xStart}
+                    />
+                </FieldInputWrapper>
+            </FormField>
+            <FormField>
+                <LaTex tex="x_{end}" />
+                <FieldInputWrapper>
+                    <NumberOnlyInput
+                        fieldName=""
+                        onChange={(oldVal, newVal) => setXEnd(newVal)}
+                        initialValue={xEnd}
+                    />
+                </FieldInputWrapper>
+            </FormField>
+            <FormField>
+                <LaTex tex="\textup{# of intervals }(n)" />
+                <FieldInputWrapper>
+                    <NumberOnlyInput
+                        fieldName=""
+                        onChange={(oldVal, newVal) => setNumOfInterval(newVal)}
+                        initialValue={numOfIntervals}
+                    />
+                </FieldInputWrapper>
+            </FormField>
+            <Button title="submit" onClick={onSubmit} />
         </FormWrapper>
     );
 }

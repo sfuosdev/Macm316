@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { create, all } from 'mathjs';
 import functionPlot from 'function-plot';
-// import useGraphState from '../../../hooks/useGraphState';
+import useGraphState from '../../../hooks/useGraphState';
 
 function CompositeSimpsonGraph() {
-    // const [state] = useGraphState();
-    // const graphState = state.simpson_rule;
+    const [state] = useGraphState();
+    const graphState = state.simpson_rule;
 
     function compositeSimpsonGraph(funcString, xStart, xEnd, n) {
         const math = create(all, {});
@@ -16,17 +16,21 @@ function CompositeSimpsonGraph() {
             target: '#graph',
             width: 1050,
             height: 740,
-            xAxis: { domain: [-10, 10] },
-            yAxis: { domain: [-10, 10] },
-            grid: true,
+            xAxis: {
+                domain: [xStart - 10, xEnd + 10],
+                label: 'x-axis',
+            },
+            yAxis: { label: 'y-axis' },
             data: [
                 {
                     fn: funcString,
                 },
             ],
+            annotations: [],
         };
 
         const h = (xEnd - xStart) / n;
+        let count = 0;
         for (let i = xStart + h; i <= xEnd; i += 2 * h) {
             const a = i - h;
             const m = i;
@@ -59,15 +63,35 @@ function CompositeSimpsonGraph() {
                 fn: P,
                 range: [a, b],
                 closed: true,
+                color: 'purple',
             });
+            options.annotations.push({
+                x: i - h,
+                text: `P${count}`,
+            });
+            count += 1;
         }
+
+        options.annotations.push({
+            x: xEnd,
+        });
 
         functionPlot(options);
     }
 
     useEffect(() => {
-        compositeSimpsonGraph('x^5+2*x^2+3x', -1, 2, 10);
-    }, []);
+        compositeSimpsonGraph(
+            graphState.fn,
+            graphState.lowerLimit,
+            graphState.upperLimit,
+            graphState.interval,
+        );
+    }, [
+        graphState.fn,
+        graphState.lowerLimit,
+        graphState.upperLimit,
+        graphState.interval,
+    ]);
 
     return <div id="graph" />;
 }
