@@ -1,4 +1,4 @@
-import { lagrangePolynomial, lagrangeDiff } from '../../lib/lagrangeDiff';
+import { lagrangeDiff, lagrangePolynomialDeriv } from '../../lib/lagrangeDiff';
 
 // lagrangeDiff(f, xStart, h) tests
 describe('lagrangePolynomial', () => {
@@ -7,7 +7,7 @@ describe('lagrangePolynomial', () => {
         const xStart = 0;
         const h = 1;
 
-        const actual = lagrangePolynomial(f, xStart, h);
+        const actual = lagrangePolynomialDeriv(f, xStart, h);
         const expected =
             '0 * (2*x-2*0-3*1)/(2*1*1) - 1 * (2*x-2*0-2*1)/(1*1) + 4 * (2*x-2*0-1)/(2*1*1)';
         expect(actual).toBe(expected);
@@ -18,7 +18,7 @@ describe('lagrangePolynomial', () => {
         const xStart = 0;
         const h = 0.1;
 
-        const actual = lagrangePolynomial(f, xStart, h);
+        const actual = lagrangePolynomialDeriv(f, xStart, h);
         const expected =
             '0 * (2*x-2*0-3*0.1)/(2*0.1*0.1) - 0.01 * (2*x-2*0-2*0.1)/(0.1*0.1) + 0.04 * (2*x-2*0-1)/(2*0.1*0.1)';
         expect(actual).toBe(expected);
@@ -29,7 +29,7 @@ describe('lagrangePolynomial', () => {
         const xStart = 0;
         const h = 1;
 
-        const actual = lagrangePolynomial(f, xStart, h);
+        const actual = lagrangePolynomialDeriv(f, xStart, h);
         const expected =
             '6 * (2*x-2*0-3*1)/(2*1*1) - 11 * (2*x-2*0-2*1)/(1*1) + 20 * (2*x-2*0-1)/(2*1*1)';
         expect(actual).toBe(expected);
@@ -40,7 +40,7 @@ describe('lagrangePolynomial', () => {
         const xStart = 0;
         const h = 1;
 
-        const actual = lagrangePolynomial(f, xStart, h);
+        const actual = lagrangePolynomialDeriv(f, xStart, h);
         const expected =
             '0 * (2*x-2*0-3*1)/(2*1*1) - 0.841471 * (2*x-2*0-2*1)/(1*1) + 0.909297 * (2*x-2*0-1)/(2*1*1)';
         expect(actual).toBe(expected);
@@ -51,7 +51,7 @@ describe('lagrangePolynomial', () => {
         const xStart = 0;
         const h = 1;
 
-        const actual = lagrangePolynomial(f, xStart, h);
+        const actual = lagrangePolynomialDeriv(f, xStart, h);
         const expected =
             '1 * (2*x-2*0-3*1)/(2*1*1) - 2.71828 * (2*x-2*0-2*1)/(1*1) + 7.38906 * (2*x-2*0-1)/(2*1*1)';
         expect(actual).toBe(expected);
@@ -62,7 +62,7 @@ describe('lagrangePolynomial', () => {
         const xStart = 0;
         const h = 1;
 
-        const actual = lagrangePolynomial(f, xStart, h);
+        const actual = lagrangePolynomialDeriv(f, xStart, h);
         const expected = '';
         expect(actual).toBe(expected);
     });

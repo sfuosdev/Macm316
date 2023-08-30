@@ -93,7 +93,7 @@ describe('Given initial state', () => {
                 const newState = calculatorReducer(prevState, dispatch);
                 expect(newState).toEqual({
                     mode: calculatorModes.NUMERICAL_INTEGRATION,
-                    method: integrationMethods.MIDPOINT_RULE,
+                    method: integrationMethods.TRAPEZOIDAL_RULE,
                 });
             });
         });
@@ -109,7 +109,7 @@ describe('Given initial state', () => {
                 ValidationError,
             );
             expect(() => calculatorReducer(initialState, dispatch)).toThrow(
-                'Calculator Reducer: Invalid state update: ValidationError: "method" must be one of [middle point, lagrange polynomial three point rule, midpoint rule, simpson rule, trapezoidal rule]',
+                'Calculator Reducer: Invalid state update: ValidationError: "method" must be one of [middle_point_diff, lagrange_three_points_diff, midpoint_rule, simpson_rule, trapezoidal_rule]',
             );
         });
 

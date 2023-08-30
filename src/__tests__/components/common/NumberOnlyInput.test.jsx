@@ -6,7 +6,11 @@ describe('NumberOnlyInput', () => {
     it('should show error message "Number Input Expected" if wrong input given', () => {
         const onChangeMock = jest.fn();
         render(
-            <NumberOnlyInput fieldName="Test Field" onChange={onChangeMock} />,
+            <NumberOnlyInput
+                fieldName="Test Field"
+                onChange={onChangeMock}
+                initialValue={0}
+            />,
         );
 
         const input = screen.getByLabelText('Test Field');
@@ -18,13 +22,17 @@ describe('NumberOnlyInput', () => {
     it('calls onChange on every key press and shows the text in the input', () => {
         const onChangeMock = jest.fn();
         render(
-            <NumberOnlyInput fieldName="Test Field" onChange={onChangeMock} />,
+            <NumberOnlyInput
+                fieldName="Test Field"
+                onChange={onChangeMock}
+                initialValue={0}
+            />,
         );
 
         const input = screen.getByLabelText('Test Field');
         fireEvent.change(input, { target: { value: '1' } });
         expect(onChangeMock).toHaveBeenCalledTimes(1);
-        expect(onChangeMock).toHaveBeenCalledWith('', '1');
+        expect(onChangeMock).toHaveBeenCalledWith(0, '1');
         expect(input.value).toBe('1');
 
         fireEvent.change(input, { target: { value: '12' } });
@@ -42,7 +50,11 @@ describe('NumberOnlyInput', () => {
         const fieldName = 'Test Field Name';
         const onChangeMock = jest.fn();
         render(
-            <NumberOnlyInput fieldName={fieldName} onChange={onChangeMock} />,
+            <NumberOnlyInput
+                fieldName={fieldName}
+                onChange={onChangeMock}
+                initialValue={0}
+            />,
         );
 
         const label = screen.getByText(fieldName);

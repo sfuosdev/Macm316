@@ -1,42 +1,57 @@
+# Macm316 - Numerical Method Visualizer
+  <img src="./public/preview.png"/>
+
 <div>
     <a href=".">
       <img src="https://github.com/sfu-software-engineering-club/numerical-method-visualizer/actions/workflows/node.js.yml/badge.svg"/>
     </a>
 <div>
 
-# Getting Started with Create React App
+Macm316 provides a visualization and plotting tool for numerical methods in Numerical Analysis. This version of the calculator currently supports two differentiation methods:  
+<ul>
+  <li>Midpoint Rule</li>
+  <li>Three-points Lagrange Polynomial Interpolation</li>
+</ul>
+two integration methods:  
+<ul>
+  <li>Trapezodial Rule</li>
+  <li>Composite Simpson 1/3 Rule</li>
+</ul>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It enables you to modify properties and functions for approximation. By using MathJax, we display the estimation calculation and formula along with the graph plot.  
+
+You can resize both the menu and the graph by dragging the divider next to the graph legend.  
+
+The demo website is live at  
+https://sfuswso.github.io/Macm316/
+
 
 ## Available Scripts
 
-In the project directory, you can run:
+To begin, install the necessary packages with the following command:
+`
+npm install
+`
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This command runs the app in development mode on your local environment. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img width="500px" src="./public/jest_test_sample.png"/>
+
+This command launches the test runner in watch mode. Our test coverage relies on Jest and React-Testing-Library.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This command builds the app for production into the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
 
 ### `npm run prettier`
 
-### `npm run lint`
+Run Prettier to automatically correct the formatting. Please check `.prettierrc.json` to see our team's convention settings.
 
+### `npm run lint`
 ### `npm run lint:fix`
+
+Run ESLint to scan and correct the formatting and maintain the code styling convention. Please check `.eslintrc.json` to see our team's convention settings.

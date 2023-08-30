@@ -4,8 +4,8 @@ import TextInput from '../../common/input/TextInput';
 import NumberOnlyInput from '../../common/input/NumberOnlyInput';
 import Button from '../../common/button/Button';
 import LaTex from '../Latex';
-import { GraphStateContext } from '../../../context/graphContext';
 import { graphDispatchActions } from '../../../context/constants';
+import useGraphState from '../../../hooks/useGraphState';
 
 const FormWrapper = styled.div`
     display: flex;
@@ -29,7 +29,7 @@ const FieldInputWrapper = styled.div`
 `;
 
 function LagrangeDiffForm() {
-    const [state, dispatch] = React.useContext(GraphStateContext);
+    const [state, dispatch] = useGraphState();
     const formState = state.lagrange_three_points_diff;
     const dispatchMethod = 'lagrange_three_points_diff';
     const [fn, setFn] = useState(formState.fn);
