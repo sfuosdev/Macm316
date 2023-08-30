@@ -1,14 +1,12 @@
 {
   "files": {
     "main.css": "/Macm316/static/css/main.30dcbffb.css",
-    "main.js": "/Macm316/static/js/main.9c557d4a.js",
+    "main.js": "/Macm316/static/js/main.dcb2c90d.js",
     "static/js/27.8416a1ec.chunk.js": "/Macm316/static/js/27.8416a1ec.chunk.js",
-    "static/media/oct.png": "/Macm316/static/media/oct.4bb497e598c121a691f7.png",
-    "static/media/sec.png": "/Macm316/static/media/sec.91c153087ba07222535b.png",
     "index.html": "/Macm316/index.html"
   },
   "entrypoints": [
     "static/css/main.30dcbffb.css",
-    "static/js/main.9c557d4a.js"
+    "static/js/main.dcb2c90d.js"
   ]
 }
