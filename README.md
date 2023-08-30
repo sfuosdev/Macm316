@@ -18,7 +18,7 @@ and two integration methods:
   <li>Composite Simpson 1/3 Rule</li>
 </ul>
 
-It enables you to modify properties and functions for approximation. By using MathJax, we display the estimation calculation and formula along with the graph plot.  
+It enables you to modify properties and functions for numerical approximation. By using MathJax, we display the estimation calculation and formula along with the graph plot.  
 
 You can resize both the menu and the graph by dragging the divider next to the graph legend.  
 
