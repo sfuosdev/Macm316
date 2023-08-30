@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import useCalculatorState from '../../hooks/useCalculatorState';
 import {
     calculatorModes,
@@ -11,11 +12,22 @@ import CompositeSimpsonGraph from './graphs/CompositeSimpsonGraph';
 import LagrangeGraph from './graphs/LagrangeGraph';
 import GraphLegend from '../common/GraphLegend';
 
+const GraphWrapper = styled.div`
+    display: flex;
+    flex: 1;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+`;
+
 function DifferntiationGraphComponent(method) {
     switch (method) {
         case differentiationMethods.MIDDLE_POINT:
             return (
-                <div>
+                <GraphWrapper>
                     <GraphLegend
                         data={[
                             { color: 'blue', title: 'f(x)' },
@@ -27,11 +39,11 @@ function DifferntiationGraphComponent(method) {
                         ]}
                     />
                     <MiddlePointDiffGraph />
-                </div>
+                </GraphWrapper>
             );
         case differentiationMethods.LAGRANGE_POLYNOMIAL_THREE_POINT:
             return (
-                <div>
+                <GraphWrapper>
                     <GraphLegend
                         data={[
                             { color: 'blue', title: 'f(x)' },
@@ -48,7 +60,7 @@ function DifferntiationGraphComponent(method) {
                         ]}
                     />
                     <LagrangeGraph />
-                </div>
+                </GraphWrapper>
             );
         default:
             return null;
@@ -59,7 +71,7 @@ function IntegrationGraphComponent(method) {
     switch (method) {
         case integrationMethods.SIMPSON_RULE:
             return (
-                <div>
+                <GraphWrapper>
                     <GraphLegend
                         data={[
                             { color: 'blue', title: 'f(x)' },
@@ -70,11 +82,11 @@ function IntegrationGraphComponent(method) {
                         ]}
                     />
                     <CompositeSimpsonGraph />
-                </div>
+                </GraphWrapper>
             );
         case integrationMethods.TRAPEZOIDAL_RULE:
             return (
-                <div>
+                <GraphWrapper>
                     <GraphLegend
                         data={[
                             { color: 'blue', title: 'f(x)' },
@@ -82,7 +94,7 @@ function IntegrationGraphComponent(method) {
                         ]}
                     />
                     <TrapezoidalGraph />
-                </div>
+                </GraphWrapper>
             );
         default:
             return null;

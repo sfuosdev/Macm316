@@ -3,12 +3,14 @@ import React, { useEffect } from 'react';
 import { create, all } from 'mathjs';
 import useGraphState from '../../../hooks/useGraphState';
 import { lagrangePolynomial, lagrangeDiff } from '../../../lib/lagrangeDiff';
+import useCalculatorState from '../../../hooks/useCalculatorState';
 
 function LagrangeGraph() {
+    const [calculatorState] = useCalculatorState();
     const [state] = useGraphState();
     const graphState = state.lagrange_three_points_diff;
 
-    function lagrangeGraph(func, xStart, h, xTarget) {
+    function lagrangeGraph(func, xStart, h, xTarget, screenWidthOffset) {
         const math = create(all, {});
 
         const polyFunc = lagrangePolynomial(func, xStart, h);
@@ -26,8 +28,8 @@ function LagrangeGraph() {
 
         const options = {
             target: '#graph',
-            width: 1050,
-            height: 740,
+            width: window.innerWidth - screenWidthOffset,
+            height: window.innerHeight - 100,
             xAxis: {
                 domain: [xStart - 10, xStart + h * 3 + 10],
                 label: 'x-axis',
@@ -78,13 +80,14 @@ function LagrangeGraph() {
             graphState.lowerLimit,
             graphState.interval,
             graphState.xTarget,
+            calculatorState.menuWidth,
         );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         graphState.fn,
         graphState.lowerLimit,
         graphState.interval,
         graphState.xTarget,
+        calculatorState.menuWidth,
     ]);
 
     return <div id="graph" />;

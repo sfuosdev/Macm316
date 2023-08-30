@@ -8,6 +8,7 @@ export const calculatorModes = {
 export const calculatorDispatchActions = {
     UPDATE_MODE: 'update_mode',
     UPDATE_METHOD: 'update_method',
+    UPDATE_MENU_WIDTH: 'update_menu_width',
 };
 export const differentiationMethods = {
     MIDDLE_POINT: 'middle_point_diff',

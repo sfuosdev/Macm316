@@ -5,16 +5,17 @@ import Calculator from './components/calculator/Calculator';
 import { CalculatorContextProvider } from './context/calculatorContext';
 import ThemeProvider from './context/ThemeProvider';
 import { GraphContextProvider } from './context/graphContext';
+import Header from './components/header/Header';
 
 const PageContainer = styled.div`
     display: flex;
-    flex-direction: row;
-    min-height: 100vh;
+    flex-direction: column;
 `;
 
-const MenuContainer = styled.div`
-    width: 550px;
-    border-right: 2px solid black;
+const BodyContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
 `;
 
 const CalculatorContainer = styled.div`
@@ -23,22 +24,21 @@ const CalculatorContainer = styled.div`
 
 function App() {
     return (
-        <PageContainer>
-            <ThemeProvider>
-                <CalculatorContextProvider>
-                    <GraphContextProvider>
-                        <>
-                            <MenuContainer>
-                                <Menu />
-                            </MenuContainer>
+        <ThemeProvider>
+            <CalculatorContextProvider>
+                <GraphContextProvider>
+                    <PageContainer>
+                        <Header />
+                        <BodyContainer>
+                            <Menu />
                             <CalculatorContainer>
                                 <Calculator />
                             </CalculatorContainer>
-                        </>
-                    </GraphContextProvider>
-                </CalculatorContextProvider>
-            </ThemeProvider>
-        </PageContainer>
+                        </BodyContainer>
+                    </PageContainer>
+                </GraphContextProvider>
+            </CalculatorContextProvider>
+        </ThemeProvider>
     );
 }
 

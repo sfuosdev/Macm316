@@ -2,20 +2,27 @@ import React, { useEffect } from 'react';
 import { create, all } from 'mathjs';
 import functionPlot from 'function-plot';
 import useGraphState from '../../../hooks/useGraphState';
+import useCalculatorState from '../../../hooks/useCalculatorState';
 
 function CompositeSimpsonGraph() {
+    const [calculatorState] = useCalculatorState();
     const [state] = useGraphState();
     const graphState = state.simpson_rule;
 
-    function compositeSimpsonGraph(funcString, xStart, xEnd, n) {
+    function compositeSimpsonGraph(
+        funcString,
+        xStart,
+        xEnd,
+        n,
+        screenWidthOffset,
+    ) {
         const math = create(all, {});
         const node = math.parse(funcString);
         const f = node.compile();
-
         const options = {
             target: '#graph',
-            width: 1050,
-            height: 740,
+            width: window.innerWidth - screenWidthOffset,
+            height: window.innerHeight - 100,
             xAxis: {
                 domain: [xStart - 10, xEnd + 10],
                 label: 'x-axis',
@@ -85,12 +92,14 @@ function CompositeSimpsonGraph() {
             graphState.lowerLimit,
             graphState.upperLimit,
             graphState.interval,
+            calculatorState.menuWidth,
         );
     }, [
         graphState.fn,
         graphState.lowerLimit,
         graphState.upperLimit,
         graphState.interval,
+        calculatorState.menuWidth,
     ]);
 
     return <div id="graph" />;

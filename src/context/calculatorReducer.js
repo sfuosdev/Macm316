@@ -13,6 +13,7 @@ import {
 export const initialCalculatorState = {
     mode: calculatorModes.NUMERICAL_DIFFERENTIATION,
     method: differentiationMethods.MIDDLE_POINT,
+    menuWidth: 550,
 };
 
 const defaultMethod = (mode) =>
@@ -39,6 +40,7 @@ const calculatorStateSchema = Joi.object({
             integrationMethods.TRAPEZOIDAL_RULE,
         )
         .required(),
+    menuWidth: Joi.number().integer().positive(),
 });
 
 /**
@@ -70,6 +72,7 @@ function calculatorReducer(prevState, dispatch) {
             state =
                 dispatch.value !== prevState.mode
                     ? {
+                          ...prevState,
                           mode: dispatch.value,
                           method: defaultMethod(dispatch.value),
                       }
@@ -78,7 +81,13 @@ function calculatorReducer(prevState, dispatch) {
         case calculatorDispatchActions.UPDATE_METHOD:
             state =
                 dispatch.value !== prevState.method
-                    ? { mode: prevState.mode, method: dispatch.value }
+                    ? { ...prevState, method: dispatch.value }
+                    : { ...prevState };
+            break;
+        case calculatorDispatchActions.UPDATE_MENU_WIDTH:
+            state =
+                dispatch.value !== prevState.menuWidth
+                    ? { ...prevState, menuWidth: dispatch.value }
                     : { ...prevState };
             break;
         default:

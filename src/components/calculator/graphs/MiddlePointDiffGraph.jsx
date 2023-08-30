@@ -3,12 +3,14 @@ import functionPlot from 'function-plot';
 import { create, all } from 'mathjs';
 import numericalDiff from '../../../lib/midpoint';
 import useGraphState from '../../../hooks/useGraphState';
+import useCalculatorState from '../../../hooks/useCalculatorState';
 
 function MiddlePointDiffGraph() {
+    const [calculatorState] = useCalculatorState();
     const [state] = useGraphState();
     const graphState = state.middle_point_diff;
 
-    function middlePointDiffGraph(f, x, h) {
+    function middlePointDiffGraph(f, x, h, screenWidthOffset) {
         const math = create(all, {});
 
         const m = numericalDiff(f, x, h);
@@ -21,8 +23,8 @@ function MiddlePointDiffGraph() {
 
         const options = {
             target: '#graph',
-            width: 1050,
-            height: 740,
+            width: window.innerWidth - screenWidthOffset,
+            height: window.innerHeight - 100,
             xAxis: {
                 domain: [x - 10, x + 10],
                 label: 'x-axis',
@@ -62,8 +64,14 @@ function MiddlePointDiffGraph() {
             graphState.fn,
             graphState.lowerLimit,
             graphState.interval,
+            calculatorState.menuWidth,
         );
-    }, [graphState.fn, graphState.lowerLimit, graphState.interval]);
+    }, [
+        graphState.fn,
+        graphState.lowerLimit,
+        graphState.interval,
+        calculatorState.menuWidth,
+    ]);
 
     return <div id="graph" />;
 }

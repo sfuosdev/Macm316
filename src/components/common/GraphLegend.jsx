@@ -9,7 +9,8 @@ function GraphLegend({ data }) {
                 border: '2px solid black',
                 padding: '10px',
                 display: 'inline-block',
-                marginLeft: '15px',
+                marginLeft: '10px',
+                marginTop: '15px',
                 borderRadius: '5px',
                 zIndex: 1,
                 backgroundColor: 'white',
@@ -34,7 +35,7 @@ function GraphLegend({ data }) {
                             marginRight: '5px',
                         }}
                     />
-                    <span style={{ fontSize: '200%' }}>{item.title}</span>
+                    <span style={{ fontSize: '150%' }}>{item.title}</span>
                 </div>
             ))}
         </div>

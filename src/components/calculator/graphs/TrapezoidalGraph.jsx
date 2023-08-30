@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { create, all } from 'mathjs';
 import functionPlot from 'function-plot';
 import useGraphState from '../../../hooks/useGraphState';
+import useCalculatorState from '../../../hooks/useCalculatorState';
 
 function TrapezoidalGraph() {
+    const [calculatorState] = useCalculatorState();
     const [state] = useGraphState();
     const graphState = state.trapezoidal_rule;
 
-    function trapezoidalGraph(funcString, xStart, xEnd, n) {
+    function trapezoidalGraph(funcString, xStart, xEnd, n, screenWidthOffset) {
         const delta = (xEnd - xStart) / n;
 
         const math = create(all, {});
@@ -16,8 +18,8 @@ function TrapezoidalGraph() {
 
         const options = {
             target: '#graph',
-            width: 1050,
-            height: 740,
+            width: window.innerWidth - screenWidthOffset,
+            height: window.innerHeight - 100,
             xAxis: {
                 domain: [xStart - 10, xEnd + 10],
                 label: 'x-axis',
@@ -57,12 +59,14 @@ function TrapezoidalGraph() {
             graphState.lowerLimit,
             graphState.upperLimit,
             graphState.interval,
+            calculatorState.menuWidth,
         );
     }, [
         graphState.fn,
         graphState.lowerLimit,
         graphState.upperLimit,
         graphState.interval,
+        calculatorState.menuWidth,
     ]);
 
     return <div id="graph" />;
