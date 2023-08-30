@@ -12,7 +12,7 @@ Macm316 provides a visualization and plotting tool for numerical methods in Nume
   <li>Midpoint Rule</li>
   <li>Three-points Lagrange Polynomial Interpolation</li>
 </ul>
-two integration methods:  
+and two integration methods:  
 <ul>
   <li>Trapezodial Rule</li>
   <li>Composite Simpson 1/3 Rule</li>
