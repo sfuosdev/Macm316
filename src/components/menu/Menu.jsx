@@ -42,9 +42,7 @@ const Resizer = styled.div`
 `;
 
 function WidthResizer({ mouseDownEvent }) {
-    return (
-        <Resizer onMouseDown={mouseDownEvent} />
-    );
+    return <Resizer onMouseDown={mouseDownEvent} />;
 }
 
 WidthResizer.propTypes = {
