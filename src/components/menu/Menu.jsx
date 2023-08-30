@@ -41,22 +41,9 @@ const Resizer = styled.div`
     }
 `;
 
-const DragIndicator = styled.div`
-    width: 10px;
-    height: 10px;
-    background-color: blue;
-    position: absolute;
-    left: 14px;
-    font-size: 20px;
-    line-height: 20px;
-    color: darken($purple, 20%);
-`;
-
 function WidthResizer({ mouseDownEvent }) {
     return (
-        <Resizer onMouseDown={mouseDownEvent}>
-            <DragIndicator />
-        </Resizer>
+        <Resizer onMouseDown={mouseDownEvent} />
     );
 }
 
