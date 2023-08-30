@@ -30,16 +30,34 @@ const MenuHeaderWrapper = styled.div`
 `;
 
 const Resizer = styled.div`
+    display: flex;
     background-color: orange;
-    width: 5px;
+    width: 6px;
     cursor: w-resize;
+    justify-content: center;
+    aligin-items: center;
     &:hover {
-        box-shadow: 0px 0px 4px orange;
+        box-shadow: 0px 0px 10px orange;
     }
 `;
 
+const DragIndicator = styled.div`
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    position: absolute;
+    left: 14px;
+    font-size: 20px;
+    line-height: 20px;
+    color: darken($purple, 20%);
+`;
+
 function WidthResizer({ mouseDownEvent }) {
-    return <Resizer onMouseDown={mouseDownEvent} />;
+    return (
+        <Resizer onMouseDown={mouseDownEvent}>
+            <DragIndicator />
+        </Resizer>
+    );
 }
 
 WidthResizer.propTypes = {
