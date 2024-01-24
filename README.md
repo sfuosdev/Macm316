@@ -23,7 +23,7 @@ It enables you to modify properties and functions for numerical approximation. B
 You can resize both the menu and the graph by dragging the divider next to the graph legend.  
 
 The demo website is live at  
-https://sfuswso.github.io/Macm316/
+https://sfuosdev.github.io/Macm316/
 
 
 ## Available Scripts
